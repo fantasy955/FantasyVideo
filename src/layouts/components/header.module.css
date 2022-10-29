@@ -1,0 +1,10 @@
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.part {
+    display: inline-flex;
+    align-items: center;
+}
