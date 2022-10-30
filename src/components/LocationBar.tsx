@@ -17,8 +17,8 @@ export default function LocationBar(props: {
     let topCategory = null
     let subCategory = null
     if (pathSnippets[0] === 'detail') {
-        topCategory = pathSnippets[1]
-        subCategory = pathSnippets[2]
+        topCategory = decodeURI(pathSnippets[1])
+        subCategory = decodeURI(pathSnippets[2])
     } else {
         if (pathSnippets.length === 1) { // 一级类别首页
             topCategory = pathSnippets[1]
