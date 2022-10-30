@@ -44,6 +44,8 @@ const viteConfig = ({ mode }: ConfigEnv): UserConfig => {
                     charset: false,
                     modifyVars: {
                         "@layout-header-background": "#1a7edb",
+                        "@menu-highlight-color": "#000000",
+                        "@menu-item-active-bg": "#1a7edb",
                     },
                 }
             },

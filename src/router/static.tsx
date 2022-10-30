@@ -20,12 +20,17 @@ const staticRoutes: Array<RouteObject> = [
                         element: <HomePage />
                     },
                     {
-                        path: '/:category',
+                        path: '/:topCategory',
                         loader: CategotyIndexLoader,
                         element: <CategoryIndex></CategoryIndex>,
                     },
                     {
-                        path: '/detail/:id',
+                        path: '/:topCategory/:subCategory',
+                        loader: CategotyIndexLoader,
+                        element: <CategoryIndex></CategoryIndex>,
+                    },
+                    {
+                        path: '/detail/:top/:sub/:id',
                         loader: VideoDetailLoader,
                         element: <VideoDetail />,
                     }

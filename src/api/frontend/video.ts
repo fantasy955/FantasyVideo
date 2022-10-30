@@ -17,3 +17,11 @@ export function getCategories(){
         method: 'get',
     }) as ApiPromise
 }
+
+export function getDetail(id: number){
+    return createAxios({
+        url: controllerUrl + 'detail',
+        params: {id},
+        method: 'get',
+    })
+}

@@ -26,4 +26,7 @@ export interface SiteConfig {
 
 export interface ReduxState {
     userinfo: UserInfo
+    videoMenu: VideoMenu
 }
+
+export type VideoMenu = Record<string, string[]>

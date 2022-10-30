@@ -13,8 +13,10 @@ import { BrowserRouter, RouterProvider } from 'react-router-dom'
 // react-redux
 import store from '/@/redux/store'
 import { Provider } from 'react-redux'
+import './index.less'
 // fake api
 import '/@/api/server'
+// i18n
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

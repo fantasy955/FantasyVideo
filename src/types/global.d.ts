@@ -18,11 +18,16 @@ interface VideoShortPreview {
     id: number,
     title: string,
     poster: string,
-    type: string,
+    topCategory: string[],
+    subCategory: string[],
     status: string | null, // 完结/更新
     releaseDate: string | null,
-    updateDate: string | null, 
+    updateDate: string | null,
     lang: string | null,  // 语言
+}
+
+interface anyObj {
+    [key: string]: any
 }
 
 interface VideoPreview extends VideoShortPreview {
@@ -37,4 +42,4 @@ interface Video extends VideoPreview {
     related: Video[] | null,
 }
 
-interface ApiPromise<T = any> extends Promise<ApiResponse<T>> {}
+interface ApiPromise<T = any> extends Promise<ApiResponse<T>> { }

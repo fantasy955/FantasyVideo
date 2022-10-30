@@ -21,24 +21,25 @@ export default function LocationBar(props: {
         subCategory = decodeURI(pathSnippets[2])
     } else {
         if (pathSnippets.length === 1) { // 一级类别首页
-            topCategory = pathSnippets[1]
+            topCategory = decodeURI(pathSnippets[0])
         } else if (pathSnippets.length === 2) { // 二级类别  
-            subCategory = pathSnippets[2]
+            topCategory = decodeURI(pathSnippets[0])
+            subCategory = decodeURI(pathSnippets[1])
         }
     }
     if (topCategory) {
         breadcrumbItems.push(
             (
-                <Breadcrumb.Item key={`/${pathSnippets[1]}`}>
-                    <Link to={`/${pathSnippets[1]}`}>{t(`video.topCategory.${topCategory}`)}</Link>
+                <Breadcrumb.Item key={`/${topCategory}`}>
+                    <Link to={`/${topCategory}`}>{t(`video.topCategory.${topCategory}`)}</Link>
                 </Breadcrumb.Item>
             )
         )
         if (subCategory) {
             breadcrumbItems.push(
                 (
-                    <Breadcrumb.Item key={`/${pathSnippets[1]}/${pathSnippets[2]}`}>
-                        <Link to={`/${pathSnippets[1]}/${pathSnippets[2]}`}>{t(`video.subCategory.${topCategory}.${subCategory}`)}</Link>
+                    <Breadcrumb.Item key={`/${topCategory}/${subCategory}`}>
+                        <Link to={`/${topCategory}/${subCategory}`}>{t(`video.subCategory.${topCategory}.${subCategory}`)}</Link>
                     </Breadcrumb.Item>
                 )
             )
