@@ -5,4 +5,5 @@ export default {
         password: '密码',
         tip: '你好 !'
     },
+    Home: '首页'
 }

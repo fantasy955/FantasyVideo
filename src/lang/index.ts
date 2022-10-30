@@ -29,9 +29,8 @@ if (lng === 'zh_cn') {
 } else if (lng === 'en') {
   assignLocale[lng].push(getLangFileMessage(import.meta.glob('./pages/zh-cn/**/*.ts', { eager: true }), 'en'))
 }
-const tmp = assignLocale[lng][0]
 Object.assign(resources[lng].translation, ...assignLocale[lng])
-
+console.log(resources[lng])
 i18n.use(initReactI18next).init({
   resources,
   lng: lng,
