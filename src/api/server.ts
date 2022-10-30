@@ -101,6 +101,15 @@ const topCategoryValues = ['Movie']
 const subCategoryValues: Record<string, string[]> = {
     'Movie': [
         'Action', 'Comedy', 'Science Fiction', 'Drama', 'War', 'Romance', 'Horror', 'Documentary', 'Adventure', 'Suspense', 'Crime', 'Thriller', 'Animation', 'Microfilm', 'Others'
+    ],
+    'Animation': [
+
+    ],
+    'Series': [
+
+    ],
+    'Variety show': [
+
     ]
 }
 
@@ -119,29 +128,32 @@ function generateRandomActorsArray(): string[] {
 function generateRandomSubCategories(topCategory: string[]): string[] {
     let num = getRandomInt(1, 5)
     let subCategories: string[] = []
-    for(let i=0; i<num; i++){
-        let top: string = topCategory[getRandomInt(0, topCategory.length-1)]
-        let sub: string = subCategoryValues[top][getRandomInt(0, subCategoryValues[top].length-1)]
-        if (!subCategories.find((item)=> item === sub)){
-            subCategories.push(sub)
+    for (let i = 0; i < num; i++) {
+        let top: string = topCategory[getRandomInt(0, topCategory.length - 1)]
+        if (subCategoryValues[top]) {
+            let sub: string = subCategoryValues[top][getRandomInt(0, subCategoryValues[top].length - 1)]
+            if (!subCategories.find((item) => item === sub)) {
+                subCategories.push(sub)
+            }
         }
     }
+
     return subCategories
 }
 
 function generateRandomTopCategories(): string[] {
     let num = getRandomInt(1, 2)
     let topCategories: string[] = []
-    for(let i=0; i<num; i++){
-        let top = topCategoryValues[getRandomInt(0, topCategoryValues.length-1)]
-        if (!topCategories.find((item)=>item === top)){
+    for (let i = 0; i < num; i++) {
+        let top = topCategoryValues[getRandomInt(0, topCategoryValues.length - 1)]
+        if (!topCategories.find((item) => item === top)) {
             topCategories.push(top)
         }
     }
     return topCategories
 }
 
-function getVideoArray(limit?: number, topCategory: string='', subCategory: string='', order: string = '') {
+function getVideoArray(limit?: number, topCategory: string = '', subCategory: string = '', order: string = '') {
     let videos: Video[] = []
     limit = typeof limit === 'undefined' ? titleValues.length : limit
     limit = limit > 0 ? limit : titleValues.length
@@ -156,14 +168,16 @@ function getVideoArray(limit?: number, topCategory: string='', subCategory: stri
         videoTemplate.poster = img
         videoTemplate.topCategory = !topCategory ? generateRandomTopCategories() : [topCategory]
         videoTemplate.subCategory = !subCategory ? generateRandomSubCategories(videoTemplate.topCategory) : [subCategory]
-        videoTemplate.description = descriptionValues[getRandomInt(0, descriptionValues.length-1)]
+        videoTemplate.description = descriptionValues[getRandomInt(0, descriptionValues.length - 1)]
         videos.push({ ...videoTemplate })
     }
     return videos
 }
 
+const videoSize = 1000
+
 createServer({
-    timing: 2000,
+    timing: 100,
     routes() {
         this.namespace = "api"
 
@@ -192,15 +206,26 @@ createServer({
             }
         })
 
-        this.get("/video/hot", (db, request) => {
-            const { topCategory, subCategory, order, limit } = request.queryParams
+        this.get("/video/index", (db, request) => {
+            const { topCategory, subCategory, order, limit, page } = request.queryParams
+            if (!topCategory) {
+                return {
+                    code: 1,
+                    data: {
+                        list: getVideoArray(Number(limit), topCategory, subCategory, order)
+                    }
+                }
+            }
             return {
                 code: 1,
                 data: {
-                    list: getVideoArray(Number(limit), topCategory, subCategory, order)
+                    list: getVideoArray(Number(limit), topCategory, subCategory, order),
+                    currentPage: page,
+                    totalPage: videoSize,
                 }
             }
-        })
+
+        }, { timing: 100 })
 
         this.get("/video/detail", (db, request) => {
             const video = getVideoArray(1)[0]

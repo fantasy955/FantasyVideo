@@ -1,26 +1,45 @@
-import { Layout } from 'antd'
-import { useEffect } from 'react'
+import { Layout, Spin } from 'antd'
+import { useEffect, useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import LocationBar from '../components/LocationBar'
+import { getVideos } from '/@/api/frontend/video'
+import VideoList from '/@/components/video/VideoList'
 
-export async function loader({ params }) {
-    return { topCategory: params.topCategory, subCategory: params.subCategory }
+interface CategoryIndexLoaderParams {
+    topCategory: string,
+    subCategory: string,
+}
+
+export function loader({ params }: { params: CategoryIndexLoaderParams }): CategoryIndexLoaderParams {
+    return params
 }
 
 export default function CategoryIndex() {
     const { Header, Content, Footer } = Layout
-    const { topCategory, subCategory } = useLoaderData()
+    const { topCategory, subCategory } = useLoaderData() as CategoryIndexLoaderParams
+    const [videos, setVideos] = useState<Video[]>([])
+    const [loadingVideos, setLoadingVideos] = useState(true)
     useEffect(() => {
-        console.log(subCategory)
-    }, [])
+        getVideos({
+            topCategory: encodeURI(topCategory),
+            subCategory: subCategory? encodeURI(subCategory) : '',
+            limit: 6*6,
+        }).then((res) => {
+            setVideos(res.data.list)
+            setLoadingVideos(false)
+        }).catch((err) => {
+
+        })
+    }, [topCategory, subCategory])
 
     return (
         <div>
             <LocationBar></LocationBar>
             <Layout>
-                <Header></Header>
                 <Content>
-                    {topCategory}
+                    <Spin spinning={loadingVideos}>
+                        <VideoList videos={videos} topCategory={topCategory} subCategory={subCategory} />
+                    </Spin>
                 </Content>
                 <Footer></Footer>
             </Layout>

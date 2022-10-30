@@ -14,14 +14,18 @@ export default function VideoItem(props: VideoItemProps) {
     const [loading, setLoding] = useState(false)
     const handleClick = () => {
         let itemTop = video.topCategory[0]
-        let itemSub = video.subCategory[0]
-        if (topCategory){
+        let itemSub = video.subCategory ? video.subCategory[0] : null
+        if (topCategory) {
             itemTop = topCategory
         }
         if (subCategory) {
             itemSub = subCategory
         }
-        navigate(`/detail/${itemTop}/${itemSub}/${video.id}`)
+        if (itemSub) {
+            navigate(`/detail/${itemTop}/${itemSub}/${video.id}`)
+        }else{
+            navigate(`/detail/${itemTop}/${video.id}`)
+        }
     }
 
     return (

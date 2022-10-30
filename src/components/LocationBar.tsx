@@ -16,10 +16,16 @@ export default function LocationBar(props: {
     const pathSnippets = location.pathname.split('/').filter(i => i);
     let topCategory = null
     let subCategory = null
-    if (pathSnippets[0] === 'detail') {
-        topCategory = decodeURI(pathSnippets[1])
-        subCategory = decodeURI(pathSnippets[2])
-    } else {
+    let title = null
+    if (pathSnippets[0] === 'detail') {  // 影片详情页
+        if (pathSnippets.length == 4) {
+            topCategory = decodeURI(pathSnippets[1])
+            subCategory = decodeURI(pathSnippets[2])
+        }else if (pathSnippets.length == 3){
+            topCategory = decodeURI(pathSnippets[1])
+        }
+        if (props.title) title = decodeURI(props.title)
+    } else { // 类别首页
         if (pathSnippets.length === 1) { // 一级类别首页
             topCategory = decodeURI(pathSnippets[0])
         } else if (pathSnippets.length === 2) { // 二级类别  
@@ -44,6 +50,15 @@ export default function LocationBar(props: {
                 )
             )
         }
+    }
+    if (title) {
+        breadcrumbItems.push(
+            (
+                <Breadcrumb.Item key={`/${topCategory}/${subCategory}`}>
+                    <a>{title}</a>
+                </Breadcrumb.Item>
+            )
+        )
     }
 
     return (

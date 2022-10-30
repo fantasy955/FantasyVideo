@@ -25,7 +25,7 @@ export default function VideoDetail() {
 
     return (
         <div>
-            <LocationBar></LocationBar>
+            <LocationBar title={video?.title}></LocationBar>
             <Spin spinning={loading}>
                 <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap' }}>
                     <Space align='start' wrap={true}>

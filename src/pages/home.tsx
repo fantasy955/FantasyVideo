@@ -2,7 +2,7 @@ import { ReduxState, UserInfo } from '/@/redux/interface/'
 import { useSelector } from 'react-redux'
 import { createUserSelector } from '/@/redux/slices/userSlice'
 import { useEffect, useState } from 'react'
-import { getHotVideo } from '../api/frontend/video'
+import { getVideos } from '../api/frontend/video'
 import VideoList from '../components/video/VideoList'
 import { Spin } from 'antd'
 
@@ -17,9 +17,9 @@ export default function Home() {
     const [homeVideos, setHomeVideos] = useState<Video[]>([])
     const [loadHomeVideos, setLoadHomeVideos] = useState(true)
     useEffect(() => {
-        getHotVideo({
+        getVideos({
             // category: 'animation',
-            limit: 15
+            limit: 18
         }).then((res) => {
             // console.log(res.data)
             setHomeVideos(res.data.list)

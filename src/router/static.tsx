@@ -33,6 +33,11 @@ const staticRoutes: Array<RouteObject> = [
                         path: '/detail/:top/:sub/:id',
                         loader: VideoDetailLoader,
                         element: <VideoDetail />,
+                    },
+                    {
+                        path: '/detail/:top/:id',
+                        loader: VideoDetailLoader,
+                        element: <VideoDetail />,
                     }
         ]
     },

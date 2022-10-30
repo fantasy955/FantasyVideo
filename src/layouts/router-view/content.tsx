@@ -23,7 +23,7 @@ export default function content() {
     }
 
     return (
-        <Content style={{ padding: '24px 50px', marginTop: 64 }}>
+        <Content style={{ padding: '24px 50px', marginTop: 64}}>
             <Outlet></Outlet>
         </Content>
     )
