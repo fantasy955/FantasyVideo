@@ -39,5 +39,15 @@ export default {
         'Variety show': {
 
         },
-    }
+    },
+    status: '状态',
+    actors: '主演',
+    related: '相关',
+    category: '类型',
+    updateTime: '更新',
+    directors: '导演',
+    region: '地区',
+    releaseTime: '年份',
+    language: '语言',
+    introduction: '剧情简介',
 }

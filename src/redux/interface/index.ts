@@ -24,9 +24,17 @@ export interface SiteConfig {
     version: string
 }
 
+export interface  ScreenInfo {
+    width: number,
+}
+
+export type ScreenType =  'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+
 export interface ReduxState {
     userinfo: UserInfo
     videoMenu: VideoMenu
+    screenInfo: ScreenInfo
 }
+
 
 export type VideoMenu = Record<string, string[]>

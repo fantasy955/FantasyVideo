@@ -228,7 +228,7 @@ createServer({
         }, { timing: 100 })
 
         this.get("/video/detail", (db, request) => {
-            const video = getVideoArray(1)[0]
+            const video = getVideoArray(13)[getRandomInt(0,12)]
             video.id = Number(request.params.id)
             return {
                 code: 1,

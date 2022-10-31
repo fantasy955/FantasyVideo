@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { Image, Descriptions, Space, Spin } from 'antd'
 import { getDetail } from '/@/api/frontend/video'
-import videoZhCn from '../lang/pages/zh-cn/video'
-import LocationBar from '../components/LocationBar'
+import LocationBar from '/@/components/LocationBar'
+import VideoDescription from '/@/components/video/VideoDescription'
 
 export async function loader({ params }) {
     return { id: params.id }
@@ -27,13 +27,10 @@ export default function VideoDetail() {
         <div>
             <LocationBar title={video?.title}></LocationBar>
             <Spin spinning={loading}>
-                <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap' }}>
-                    <Space align='start' wrap={true}>
-                        <Image placeholder={true} preview={false} style={{ width: 230, height: 300 }} src={video?.poster}></Image>
-                        <Descriptions style={{}} bordered={true} size={'default'} title={video?.title}>
-                        </Descriptions>
-                    </Space>
-                </div>
+                {
+                    video ? <VideoDescription video={video} /> : <></>
+                }
+                
             </Spin>
         </div>
 

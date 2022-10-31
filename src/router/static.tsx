@@ -2,8 +2,8 @@ import { RouteObject } from 'react-router-dom'
 import IndexLayout from '/@/layouts/Index'
 import HomePage from '/@/pages/home'
 import ErrorPage from '/@/pages/ErrorPage'
-import CategoryIndex, { loader as CategotyIndexLoader } from '../pages/CategoryIndex'
-import VideoDetail, { loader as VideoDetailLoader } from '../pages/VideoDetail'
+import CategoryIndex, { loader as CategotyIndexLoader } from '../pages/video/CategoryIndex'
+import VideoDetail, { loader as VideoDetailLoader } from '../pages/video/VideoDetail'
 
 
 const staticRoutes: Array<RouteObject> = [
