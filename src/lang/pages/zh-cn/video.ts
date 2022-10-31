@@ -50,4 +50,6 @@ export default {
     releaseTime: '年份',
     language: '语言',
     introduction: '剧情简介',
+    unfold: '展开',
+    hide: '隐藏',
 }

@@ -36,7 +36,7 @@ export default function CategoryIndex() {
     }, [topCategory, subCategory])
 
     useEffect(()=>{
-        console.log(sceenType)
+        
     }, [sceenType])
 
     return (

@@ -54,7 +54,7 @@ export default function VideoDescription(props: VideoDescriptionProps) {
                                     {introOverSize ?
                                         <div style={{ display: 'inline-block' }}>
                                             <span style={{ marginLeft: 8 }}>...</span>
-                                            <a style={{ marginLeft: 8 }} onClick={() => { changeIntro() }}> {showUnfoldIntro ? '展开' : '隐藏'}</a>
+                                            <a style={{ marginLeft: 8 }} onClick={() => { changeIntro() }}> {showUnfoldIntro ? t('video.unfold') : t('video.hide')}</a>
                                         </div>
                                         : ''}
                                 </div>
