@@ -24,11 +24,18 @@ export interface SiteConfig {
     version: string
 }
 
-export interface  ScreenInfo {
+export interface ScreenInfo {
     width: number,
 }
 
-export type ScreenType =  'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export enum ScreenType {
+    xs = 480,
+    sm = 576,
+    md = 768,
+    lg = 992,
+    xl = 1200,
+    xxl = 1600,
+}
 
 export interface ReduxState {
     userinfo: UserInfo

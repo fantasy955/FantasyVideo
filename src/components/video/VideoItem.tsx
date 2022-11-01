@@ -21,6 +21,7 @@ export default function VideoItem(props: VideoItemProps) {
         if (subCategory) {
             itemSub = subCategory
         }
+        // console.log(itemTop, itemSub)
         if (itemSub) {
             navigate(`/detail/${itemTop}/${itemSub}/${video.id}`)
         }else{

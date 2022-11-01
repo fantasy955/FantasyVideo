@@ -1,5 +1,8 @@
 import VedioItem from "./VideoItem"
 import { Card } from 'antd'
+import { selectScreenType } from '/@/redux/slices/screenSlice'
+import { ScreenType } from "/@/redux/interface"
+import { useSelector } from 'react-redux'
 
 interface VedioListProps {
     videos: Video[]
@@ -9,6 +12,8 @@ interface VedioListProps {
 
 export default function VedioList(props: VedioListProps) {
     const { topCategory, subCategory } = props
+    const screenType = useSelector(selectScreenType)
+
     return (
         <div style={{
             display: 'flex',
@@ -17,7 +22,7 @@ export default function VedioList(props: VedioListProps) {
             alignItems: 'center',
             columnGap: '16px',
             rowGap: '16px',
-            width: 1200,  // 每行6个
+            width: screenType >= ScreenType.xl ? 1200 : screenType >= ScreenType.md ?  600 : 300,  // 每行6个
             marginLeft: 'auto',
             marginRight: 'auto',
         }}>

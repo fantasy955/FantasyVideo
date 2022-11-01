@@ -19,9 +19,10 @@ export default function Index() {
             }
             timer = setTimeout(()=>{
                 dispatch(setWidth(document.body.clientWidth))
-                console.log(document.body.clientWidth)
+                // console.log(document.body.clientWidth)
             }, 100)
         }
+        dispatch(setWidth(document.body.clientWidth))
 
         signIn('post', token).then((res) => {
             dispatch(sighInSucceed(res.data))

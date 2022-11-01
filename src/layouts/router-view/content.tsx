@@ -5,6 +5,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { removeToken, sighInSucceed } from '/@/redux/slices/userSlice'
 import { signIn } from "/@/api/frontend/user";
 import store from "/@/redux/store";
+import { selectScreenType } from '/@/redux/slices/screenSlice'
 
 export default function content() {
     // 当处在react组件环境下时，这两种方法可以使用
@@ -12,6 +13,7 @@ export default function content() {
     // const userInfo = store.getState().userinfo
     const userInfo = useSelector((state) => state.userinfo)
     const dispatch = useDispatch()
+    const screenType = useSelector(selectScreenType)
 
     const location = useLocation()
     const [componentKeyState, setComponentKey] = useState({
@@ -23,7 +25,7 @@ export default function content() {
     }
 
     return (
-        <Content style={{ padding: '24px 50px', marginTop: 64}}>
+        <Content style={{ padding: '24px 50px', marginTop: 64 }}>
             <Outlet></Outlet>
         </Content>
     )

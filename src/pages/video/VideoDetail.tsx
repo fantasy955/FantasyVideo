@@ -30,7 +30,6 @@ export default function VideoDetail() {
                 {
                     video ? <VideoDescription video={video} /> : <></>
                 }
-                
             </Spin>
         </div>
 

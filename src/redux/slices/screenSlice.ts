@@ -1,5 +1,5 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-import type { ReduxState, ScreenInfo, ScreenType } from '../interface'
+import { ReduxState, ScreenInfo, ScreenType } from '../interface'
 
 const initalScrrenState: () => ScreenInfo = () => {
     return {
@@ -28,19 +28,21 @@ export const selectScreenWidth = createSelector(
 
 export const selectScreenType: (state: ReduxState) => ScreenType = (state) => {
     const { width } = state.screenInfo
-    if (width >= 1600){
-        return 'xxl'
-    }else if (width >= 1200){
-        return 'xl'
-    }else if (width >= 992){
-        return 'lg'
-    }else if (width >= 768){
-        return 'md'
-    }else if (width >= 576){
-        return 'sm'
-    }else{
-        return 'xs'
+    const { xxl, xl, lg, md, sm, xs } = ScreenType
+    if (width >= 1600) {
+        return xxl
+    } else if (width >= 1200) {
+        return xl
+    } else if (width >= 992) {
+        return lg
+    } else if (width >= 768) {
+        return md
+    } else if (width >= 576) {
+        return sm
+    } else {
+        return xs
     }
 }
+
 
 export const { setWidth } = screenSlice.actions
