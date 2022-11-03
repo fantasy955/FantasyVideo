@@ -9,7 +9,7 @@ export default function layout() {
         <Layout>
             <Header></Header>
             <Content></Content>
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
         </Layout>
     )
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
-import { Image, Descriptions, Space, Spin } from 'antd'
+import { Image, Spin, Divider } from 'antd'
 import { getDetail } from '/@/api/frontend/video'
 import LocationBar from '/@/components/LocationBar'
 import VideoDescription from '/@/components/video/VideoDescription'
@@ -26,6 +26,7 @@ export default function VideoDetail() {
     return (
         <div>
             <LocationBar title={video?.title}></LocationBar>
+            <Divider style={{marginTop: 4, marginBottom: 4}}></Divider>
             <Spin spinning={loading}>
                 {
                     video ? <VideoDescription video={video} /> : <></>

@@ -52,4 +52,11 @@ export default {
     introduction: '剧情简介',
     unfold: '展开',
     hide: '隐藏',
+    filter: '筛选',
+    order: {
+        '': '',
+        time: '最新',
+        hot: '最热',
+        recommendation: ''
+    },
 }

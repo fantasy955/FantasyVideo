@@ -3,43 +3,50 @@ import React, { useState, useEffect, useRef, forwardRef, ChangeEvent, FormEvent 
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { getDetail } from '/@/api/frontend/video'
-import { selectScreenType } from '/@/redux/slices/screenSlice'
+import { selectScreenType, selectMinWidth } from '/@/redux/slices/screenSlice'
 import { ScreenType } from '/@/redux/interface'
 
 interface VideoDescriptionProps {
     video: Video,
-    pTop: string,
-    pSub: string,
 }
 export default function VideoDescription(props: VideoDescriptionProps) {
-    const { video, pTop, pSub } = props
+    const { video } = props
     const { t } = useTranslation()
     const [intro, setIntro] = useState('')
     const [showUnfoldIntro, setShowUnfoldIntro] = useState(true)
     const [introOverSize, setIntroOversize] = useState(false)
     const [shortIntro, setShortIntro] = useState('')
     const screenType = useSelector(selectScreenType)
-    const [topCategory, setTopCategory] = useState<string | null>(null)
-    const [subCategory, setSubCategory] = useState<string | null>(null)
-    useEffect(()=>{
-        if (pTop){
-            setTopCategory(pTop)
-        }else{
-            setTopCategory(video.topCategory[0])
-        }
-        if (pSub){
-            setSubCategory(pSub)
-        }else if (video.subCategory){
-            setSubCategory(video.subCategory[0])
-        }
-    }, [])
+    // const categoryInfo = video.subCategory ? video.subCategory.map((item) => {
+    //     t(`video.topCate`)
+    // }).join(',') : video.topCategory.map((item) => {
+
+    // }).join(',')
+    const [categoryInfo, setCategoryInfo] = useState('')
     useEffect(() => {
-        let limitSize = screenType >= ScreenType.xl ? 320 : screenType >= ScreenType.lg ? 200 : screenType >= ScreenType.md ? 100 : 50
+        const topCategories = Object.getOwnPropertyNames(video.category)
+        const subCategories = topCategories.map((top)=>{
+            return video.category[top].map((sub)=>{
+                return t(`video.subCategory.${top}.${sub}`)
+            })
+        }).flat()
+        const strTop = topCategories.map((item) => {
+            return t(`video.topCategory.${item}`)
+        }).join(',')
+        const strSub = subCategories.join(',')
+        setCategoryInfo(strSub ? strTop + '/' + strSub : strTop)
+    }, [])
+    const minWidth = useSelector(selectMinWidth)
+
+    useEffect(() => {
+        let limitSize = screenType >= ScreenType.xxl ? 320 : screenType >= ScreenType.xl ? 250 : screenType >= ScreenType.lg ? 180 : screenType >= ScreenType.md ? 80 : 50
         setShortIntro(video.description!.substring(0, limitSize))
         if (video.description!.length > limitSize) {
             setIntroOversize(true)
             setIntro(video.description!.substring(0, limitSize))
+            setShowUnfoldIntro(true)
         } else {
+            setIntroOversize(false)
             setIntro(video.description!)
         }
     }, [screenType])
@@ -54,11 +61,13 @@ export default function VideoDescription(props: VideoDescriptionProps) {
     }
 
     return (
-        <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', minWidth: minWidth }}>
             <Space align='start' wrap={true}>
                 <Descriptions layout='vertical' style={{ height: showUnfoldIntro ? 300 : 'auto', width: '100%' }} column={2}>
-                    <Descriptions.Item style={{ width: 300 }}>
-                        <Image placeholder={true} style={{ width: 230, height: 300 }} preview={false} src={video.poster}></Image>
+                    <Descriptions.Item style={{ width: screenType >= ScreenType.lg ? 300 : 150 }}>
+                        <Image placeholder={true} style={
+                            screenType >= ScreenType.lg ? { width: 230, height: 300 } : { width: 115, height: 150 }
+                        } preview={false} src={video.poster}></Image>
                     </Descriptions.Item>
                     <Descriptions.Item style={{ marginRight: 0 }}>
                         <Descriptions title={video.title} column={2} >
@@ -70,9 +79,7 @@ export default function VideoDescription(props: VideoDescriptionProps) {
                             </Descriptions.Item>
                             <Descriptions.Item style={{ paddingBottom: 1 }} span={2} label={t(`video.related`) as string}>Zhou Maomao</Descriptions.Item>
                             <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.category`) as string}>
-                                {
-                                    subCategory ? t(`video.topCategory.${topCategory}`) + ', ' +  t(`video.subCategory.${topCategory}.${subCategory}`) as string :  t(`video.topCategory.${topCategory}`) as string
-                                }
+                                {categoryInfo}
                             </Descriptions.Item>
                             <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.updateTime`) as string}>Zhou Maomao</Descriptions.Item>
                             <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.directors`) as string}>Zhou Maomao</Descriptions.Item>
@@ -84,7 +91,9 @@ export default function VideoDescription(props: VideoDescriptionProps) {
                                     {intro}
                                     {introOverSize ?
                                         <div style={{ display: 'inline-block' }}>
-                                            <span style={{ marginLeft: 8 }}>...</span>
+                                            {
+                                                showUnfoldIntro ? <span style={{ marginLeft: 8 }}>...</span> : ''
+                                            }
                                             <a style={{ marginLeft: 8 }} onClick={() => { changeIntro() }}> {showUnfoldIntro ? t('video.unfold') : t('video.hide')}</a>
                                         </div>
                                         : ''}

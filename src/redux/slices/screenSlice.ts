@@ -4,6 +4,7 @@ import { ReduxState, ScreenInfo, ScreenType } from '../interface'
 const initalScrrenState: () => ScreenInfo = () => {
     return {
         width: 1200,
+        minWidth: 600
     }
 }
 
@@ -24,6 +25,11 @@ export const screenInfo = (state: ReduxState) => state.screenInfo
 export const selectScreenWidth = createSelector(
     screenInfo,
     (state) => state.width
+)
+
+export const selectMinWidth = createSelector(
+    screenInfo,
+    (state) => state.minWidth
 )
 
 export const selectScreenType: (state: ReduxState) => ScreenType = (state) => {

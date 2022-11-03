@@ -37,7 +37,7 @@ export default function LocationBar(props: {
         breadcrumbItems.push(
             (
                 <Breadcrumb.Item key={`/${topCategory}`}>
-                    <Link to={`/${topCategory}`}>{t(`video.topCategory.${topCategory}`)}</Link>
+                    <Link to={`/${topCategory}`}>{t(`video.topCategory.${topCategory}`) as string}</Link>
                 </Breadcrumb.Item>
             )
         )
@@ -45,7 +45,7 @@ export default function LocationBar(props: {
             breadcrumbItems.push(
                 (
                     <Breadcrumb.Item key={`/${topCategory}/${subCategory}`}>
-                        <Link to={`/${topCategory}/${subCategory}`}>{t(`video.subCategory.${topCategory}.${subCategory}`)}</Link>
+                        <Link to={`/${topCategory}/${subCategory}`}>{t(`video.subCategory.${topCategory}.${subCategory}`) as string}</Link>
                     </Breadcrumb.Item>
                 )
             )
@@ -66,7 +66,6 @@ export default function LocationBar(props: {
             <Breadcrumb>
                 {breadcrumbItems}
             </Breadcrumb>
-            <Divider></Divider>
         </div>
 
     )

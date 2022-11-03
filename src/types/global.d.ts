@@ -18,8 +18,7 @@ interface VideoShortPreview {
     id: number,
     title: string,
     poster: string,
-    topCategory: string[],
-    subCategory: string[],
+    category: Record<string, string[]>,
     status: string | null, // 完结/更新
     releaseDate: string | null,
     updateDate: string | null,

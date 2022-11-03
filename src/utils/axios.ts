@@ -48,6 +48,7 @@ function createAxios(axiosConfig: AxiosRequestConfig, token: string='', options:
     // 请求拦截
     Axios.interceptors.request.use(
         (config) => {
+            // console.log(getPendingKey(config))
             removePending(config)
             options.CancelDuplicateRequest && addPending(config)
             // 自动携带token

@@ -26,6 +26,7 @@ export interface SiteConfig {
 
 export interface ScreenInfo {
     width: number,
+    minWidth: number
 }
 
 export enum ScreenType {
@@ -37,11 +38,27 @@ export enum ScreenType {
     xxl = 1600,
 }
 
+export interface VideoFilter {
+    params: {
+        topCategory: string | null,
+        subCategory: string | null,
+        order: string | null,
+        year: number | null,
+        region: string | null,
+        limit: number | null,
+        page: number | null,
+    },
+    data: Video[] | null,
+    total: number | null,
+    total_page: number | null,
+}
+
+
 export interface ReduxState {
     userinfo: UserInfo
     videoMenu: VideoMenu
     screenInfo: ScreenInfo
+    videoFilter: VideoFilter
 }
-
 
 export type VideoMenu = Record<string, string[]>

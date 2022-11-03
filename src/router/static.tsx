@@ -4,6 +4,7 @@ import HomePage from '/@/pages/home'
 import ErrorPage from '/@/pages/ErrorPage'
 import CategoryIndex, { loader as CategotyIndexLoader } from '../pages/video/CategoryIndex'
 import VideoDetail, { loader as VideoDetailLoader } from '../pages/video/VideoDetail'
+import path from 'path'
 
 
 const staticRoutes: Array<RouteObject> = [
@@ -20,16 +21,6 @@ const staticRoutes: Array<RouteObject> = [
                         element: <HomePage />
                     },
                     {
-                        path: '/:topCategory',
-                        loader: CategotyIndexLoader,
-                        element: <CategoryIndex></CategoryIndex>,
-                    },
-                    {
-                        path: '/:topCategory/:subCategory',
-                        loader: CategotyIndexLoader,
-                        element: <CategoryIndex></CategoryIndex>,
-                    },
-                    {
                         path: '/detail/:top/:sub/:id',
                         loader: VideoDetailLoader,
                         element: <VideoDetail />,
@@ -39,10 +30,23 @@ const staticRoutes: Array<RouteObject> = [
                         loader: VideoDetailLoader,
                         element: <VideoDetail />,
                     }
+                ]
+            },
         ]
-    },
-]
     }
 ]
+
+
+
+staticRoutes[0].children!.push(
+    ...['/:topCategory', '/:topCategory/:subCategory'].map((path) => {
+        return {
+            path: path,
+            loader: CategotyIndexLoader,
+            element: <CategoryIndex />,
+        }
+    })
+)
+
 
 export { staticRoutes }

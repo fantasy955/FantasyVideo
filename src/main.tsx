@@ -13,10 +13,12 @@ import { BrowserRouter, RouterProvider } from 'react-router-dom'
 // react-redux
 import store from '/@/redux/store'
 import { Provider } from 'react-redux'
-import './index.less'
 // fake api
 import '/@/api/server'
 // i18n
+// css
+import './index.less'
+// import './components/video/FilterBar.less'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

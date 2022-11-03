@@ -53,4 +53,15 @@ export const { setMenu } = videoCategoryMenuSlice.actions
 
 export const selectVideoMenu = (state: ReduxState) => state.videoMenu
 
+export const selectTopCategory = createSelector(
+    selectVideoMenu,
+    (state) => {
+        let res = []
+        for (let top in state){
+            res.push(top)
+        }
+        return res
+    }
+)
+
 export default videoCategoryMenuSlice.reducer

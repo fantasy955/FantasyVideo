@@ -2,17 +2,7 @@ import createAxios from '/@/utils/axios'
 
 const controllerUrl = '/api/video/'
 
-export type VideoQueryParams = {
-    'topCategory': string,
-    'subCategory': string | '' | null,
-    'limit': number,
-    'keywords': string,
-    'order': 'hot' | 'time' | 'recommendation' | null | '',
-    'id'?: number,
-    'page'?: number,
-}
-
-export function getVideos(params: object = {}){
+export function getVideos(params: {}){
     return createAxios({
         url: controllerUrl + 'index',
         params: params,

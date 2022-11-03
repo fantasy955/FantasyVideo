@@ -44,7 +44,7 @@ export default function Header() {
     }, [videoMenu])
 
     return (
-        <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+        <Header style={{ position: 'fixed', zIndex: 99, width: '100%'}}>
             <div className={styles.main}>
                 <div className={styles.part}>
                     <Menu mode="horizontal" items={videoMenuItems}
