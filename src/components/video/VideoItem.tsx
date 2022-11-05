@@ -1,4 +1,5 @@
 import { Card } from 'antd';
+import { Content } from 'antd/lib/layout/layout';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 

@@ -43,6 +43,7 @@ const viteConfig = ({ mode }: ConfigEnv): UserConfig => {
                     javascriptEnabled: true,
                     charset: false,
                     modifyVars: {
+                        "@font-size-base": "16px",
                         "@primary-color": "#1a7edb",
                         "@layout-header-background": "#1a7edb",
                         "@menu-highlight-color": "#000000",

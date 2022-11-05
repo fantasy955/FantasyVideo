@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { getDetail } from '/@/api/frontend/video'
 import { selectScreenType, selectMinWidth } from '/@/redux/slices/screenSlice'
 import { ScreenType } from '/@/redux/interface'
+import PlayerSelector from '/@/components/player/PlayerSelector'
+
 
 interface VideoDescriptionProps {
     video: Video,
@@ -25,8 +27,8 @@ export default function VideoDescription(props: VideoDescriptionProps) {
     const [categoryInfo, setCategoryInfo] = useState('')
     useEffect(() => {
         const topCategories = Object.getOwnPropertyNames(video.category)
-        const subCategories = topCategories.map((top)=>{
-            return video.category[top].map((sub)=>{
+        const subCategories = topCategories.map((top) => {
+            return video.category[top].map((sub) => {
                 return t(`video.subCategory.${top}.${sub}`)
             })
         }).flat()
@@ -60,49 +62,61 @@ export default function VideoDescription(props: VideoDescriptionProps) {
         setShowUnfoldIntro(!showUnfoldIntro)
     }
 
-    return (
-        <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', minWidth: minWidth }}>
-            <Space align='start' wrap={true}>
-                <Descriptions layout='vertical' style={{ height: showUnfoldIntro ? 300 : 'auto', width: '100%' }} column={2}>
-                    <Descriptions.Item style={{ width: screenType >= ScreenType.lg ? 300 : 150 }}>
-                        <Image placeholder={true} style={
-                            screenType >= ScreenType.lg ? { width: 230, height: 300 } : { width: 115, height: 150 }
-                        } preview={false} src={video.poster}></Image>
-                    </Descriptions.Item>
-                    <Descriptions.Item style={{ marginRight: 0 }}>
-                        <Descriptions title={video.title} column={2} >
-                            <Descriptions.Item style={{ paddingBottom: 1 }} span={2} label={t(`video.status`) as string}>Zhou Maomao</Descriptions.Item>
-                            <Descriptions.Item style={{ paddingBottom: 1 }} span={2} label={t(`video.actors`) as string}>
+    const poster = (
+        <Descriptions.Item style={{ width: screenType >= ScreenType.lg ? 300 : 150 }}>
+            <Image placeholder={true} style={
+                screenType >= ScreenType.lg ? { width: 230, height: 300 } : { width: 115, height: 150 }
+            } preview={false} src={video.poster}></Image>
+        </Descriptions.Item>
+    )
+
+    const info = (
+        <Descriptions.Item style={{ marginRight: 0 }}>
+            <Descriptions contentStyle={{ fontSize: 18 }} labelStyle={{ fontSize: 18 }} title={video.title} column={2} >
+                <Descriptions.Item style={{ paddingBottom: 1 }} span={2} label={t(`video.status`) as string}>Zhou Maomao</Descriptions.Item>
+                <Descriptions.Item style={{ paddingBottom: 1 }} span={2} label={t(`video.actors`) as string}>
+                    {
+                        video.actors?.join(', ')
+                    }
+                </Descriptions.Item>
+                <Descriptions.Item style={{ paddingBottom: 1 }} span={2} label={t(`video.related`) as string}>Zhou Maomao</Descriptions.Item>
+                <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.category`) as string}>
+                    {categoryInfo}
+                </Descriptions.Item>
+                <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.updateTime`) as string}>Zhou Maomao</Descriptions.Item>
+                <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.directors`) as string}>Zhou Maomao</Descriptions.Item>
+                <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.region`) as string}>Zhou Maomao</Descriptions.Item>
+                <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.releaseTime`) as string}>Zhou Maomao</Descriptions.Item>
+                <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.language`) as string}>Zhou Maomao</Descriptions.Item>
+                <Descriptions.Item style={{ paddingBottom: 1 }} span={2} label={t(`video.introduction`) as string}>
+                    <div>
+                        {intro}
+                        {introOverSize ?
+                            <div style={{ display: 'inline-block' }}>
                                 {
-                                    video.actors?.join(', ')
+                                    showUnfoldIntro ? <span style={{ marginLeft: 8 }}>...</span> : ''
                                 }
-                            </Descriptions.Item>
-                            <Descriptions.Item style={{ paddingBottom: 1 }} span={2} label={t(`video.related`) as string}>Zhou Maomao</Descriptions.Item>
-                            <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.category`) as string}>
-                                {categoryInfo}
-                            </Descriptions.Item>
-                            <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.updateTime`) as string}>Zhou Maomao</Descriptions.Item>
-                            <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.directors`) as string}>Zhou Maomao</Descriptions.Item>
-                            <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.region`) as string}>Zhou Maomao</Descriptions.Item>
-                            <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.releaseTime`) as string}>Zhou Maomao</Descriptions.Item>
-                            <Descriptions.Item style={{ paddingBottom: 1 }} label={t(`video.language`) as string}>Zhou Maomao</Descriptions.Item>
-                            <Descriptions.Item style={{ paddingBottom: 1 }} span={2} label={t(`video.introduction`) as string}>
-                                <div>
-                                    {intro}
-                                    {introOverSize ?
-                                        <div style={{ display: 'inline-block' }}>
-                                            {
-                                                showUnfoldIntro ? <span style={{ marginLeft: 8 }}>...</span> : ''
-                                            }
-                                            <a style={{ marginLeft: 8 }} onClick={() => { changeIntro() }}> {showUnfoldIntro ? t('video.unfold') : t('video.hide')}</a>
-                                        </div>
-                                        : ''}
-                                </div>
-                            </Descriptions.Item>
-                        </Descriptions>
+                                <a style={{ marginLeft: 8 }} onClick={() => { changeIntro() }}> {showUnfoldIntro ? t('video.unfold') as string : t('video.hide') as string}</a>
+                            </div>
+                            : ''}
+                    </div>
+                </Descriptions.Item>
+            </Descriptions>
+        </Descriptions.Item>
+    )
+
+    return (
+        <div style={{ width: '100%', minWidth: minWidth }}>
+            <Space align='start' wrap={true}>
+                <Descriptions layout='vertical' style={{ height: 'auto', width: '100%' }} column={3}>
+                    {poster}
+                    {info}
+                    <Descriptions.Item style={{width: '20%'}}>
+
                     </Descriptions.Item>
                 </Descriptions>
             </Space>
+            <PlayerSelector id={video.id} video={video} />
         </div>
     )
 }

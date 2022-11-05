@@ -59,8 +59,11 @@ export default function CategoryIndex() {
     ) => {
         const { top, sub, order, year, region } = params
         const withSearch = order ? true : year ? true : region ? true : false
-        const to = `/${top}${sub ? `/${sub}` : ''}` +
+        let to = `/${top}${sub ? `/${sub}` : ''}` +
             `${withSearch ? '?' + `${order ? 'order=' + order + '&' : ''}${year ? 'year=' + year + '&' : ''}${region ? 'region=' + region + '&' : ''}` : ''}`
+        if(to.endsWith('&')){
+            to = to.substring(0, to.length-1)
+        }
         navigate(to)
     }
 

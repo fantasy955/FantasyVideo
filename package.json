@@ -24,6 +24,7 @@
     "react-i18next": "^12.0.0",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.2",
+    "react-svg": "^15.1.11",
     "redux": "^4.2.0",
     "redux-actions": "^2.6.5",
     "seedrandom": "^3.0.5"

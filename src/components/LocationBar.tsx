@@ -21,10 +21,12 @@ export default function LocationBar(props: {
         if (pathSnippets.length == 4) {
             topCategory = decodeURI(pathSnippets[1])
             subCategory = decodeURI(pathSnippets[2])
-        }else if (pathSnippets.length == 3){
+        } else if (pathSnippets.length == 3) {
             topCategory = decodeURI(pathSnippets[1])
         }
         if (props.title) title = decodeURI(props.title)
+    }else if(pathSnippets[0] === 'search'){
+
     } else { // 类别首页
         if (pathSnippets.length === 1) { // 一级类别首页
             topCategory = decodeURI(pathSnippets[0])
@@ -63,7 +65,7 @@ export default function LocationBar(props: {
 
     return (
         <div>
-            <Breadcrumb>
+            <Breadcrumb style={{ fontSize: 16 }}>
                 {breadcrumbItems}
             </Breadcrumb>
         </div>

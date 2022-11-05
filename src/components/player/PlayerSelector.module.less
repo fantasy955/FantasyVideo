@@ -1,0 +1,44 @@
+.videoTile {
+    background-color: chocolate;
+    width: auto;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.videoTile h1 {
+    display: inline-block;
+    color: white;
+}
+
+.video__url__item {
+    float: left;
+    width: 129px;
+    list-style: none; // 消除小点
+    margin: 4px;
+    padding: 4px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.video__url__item a {
+    color: black;
+    display: block;
+    background-color: rgba(149, 144, 144, 0.826);
+    width: 88%;
+    height: 40px;
+    line-height: 40px;  // height + line-height实现居中
+    border-radius: 10px;
+}
+.video__url__item a:hover {
+    background-color: @primary-color;
+    color: white;
+}
+
+@media screen {
+    @media (max-width: 768px) {
+        .video__url__item {
+            width: 20%;
+        }
+    }
+}

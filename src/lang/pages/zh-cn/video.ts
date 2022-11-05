@@ -57,6 +57,6 @@ export default {
         '': '',
         time: '最新',
         hot: '最热',
-        recommendation: ''
+        recommendation: '推荐'
     },
 }

@@ -205,7 +205,7 @@ function sleep(n: number) {
 createServer({
     routes() {
         this.namespace = "api"
-        this.timing = 100* 3
+        this.timing = 100 * 3
         this.post("/user/signIn", (db, request) => {
             // console.log(request)
             return {
@@ -233,7 +233,7 @@ createServer({
 
         this.get("/video/index", async (db, request) => {
             const { topCategory, subCategory, order, limit, page, year, region } = request.queryParams
-            const  data = getVideoArray(Number(limit), topCategory, subCategory, order)
+            const data = getVideoArray(Number(limit), topCategory, subCategory, order)
 
             return {
                 code: 1,
@@ -249,10 +249,41 @@ createServer({
 
         this.get("/video/detail", (db, request) => {
             const video = getVideoArray(13)[getRandomInt(0, 12)]
-            video.id = Number(request.params.id)
+            video.id = Number(request.queryParams!.id)
             return {
                 code: 1,
                 data: video
+            }
+        })
+
+        this.get("/player/index", (db, request) => {
+            const { id } = request.queryParams
+            return {
+                code: 1,
+                data: {
+                    resources: [
+                        {
+                            source: '腾讯播放源',
+                            files: [
+                                { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' },
+                            ],
+                        }, {
+                            source: '无尽资源',
+                            files: [
+                                { name: '第1集' }, { name: '第二集' }, { name: '第三集' }, { name: '第四集' },
+                            ],
+                        }, {
+                            source: '红牛资源',
+                            files: [],
+                        }, {
+                            source: '天空资源',
+                            files: [],
+                        }, {
+                            source: '闪刀资源',
+                            files: [],
+                        },
+                    ]
+                }
             }
         })
     },
