@@ -7,10 +7,23 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+./FantasyVideo/logs
+./FantasyVideo/*.log
+./FantasyVideo/npm-debug.log*
+./FantasyVideo/yarn-debug.log*
+./FantasyVideo/yarn-error.log*
+./FantasyVideo/pnpm-debug.log*
+./FantasyVideo/lerna-debug.log*
+
 node_modules
 dist
 dist-ssr
 *.local
+
+./FantasyVideo/node_modules
+./FantasyVideo/dist
+./FantasyVideo/dist-ssr
+./FantasyVideo/*.local
 
 # Editor directories and files
 .vscode/*
