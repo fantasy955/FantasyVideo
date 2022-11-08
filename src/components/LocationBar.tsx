@@ -26,7 +26,15 @@ export default function LocationBar(props: {
         }
         if (props.title) title = decodeURI(props.title)
     }else if(pathSnippets[0] === 'search'){
-
+        breadcrumbItems.push(
+            (
+                <Breadcrumb.Item key={'search'}>
+                    搜索
+                </Breadcrumb.Item>
+            )
+        )
+    }else if (pathSnippets[0] === 'vod') {
+        
     } else { // 类别首页
         if (pathSnippets.length === 1) { // 一级类别首页
             topCategory = decodeURI(pathSnippets[0])
@@ -35,6 +43,7 @@ export default function LocationBar(props: {
             subCategory = decodeURI(pathSnippets[1])
         }
     }
+
     if (topCategory) {
         breadcrumbItems.push(
             (

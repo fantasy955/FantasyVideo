@@ -2,6 +2,7 @@ import { Card } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
+import styles from './css/VideoItem.module.css'
 
 interface VideoItemProps {
     video: Video,
@@ -37,6 +38,7 @@ export default function VideoItem(props: VideoItemProps) {
             bordered={false}
             style={{ width: 180, height: 280, overflow: 'hidden' }}
             bodyStyle={{ padding: 4 }}
+            className = {styles.video}
             cover={<img style={{ width: '180px', height: '230px' }} alt={video.title} src={video.poster} />}
             onMouseOver={() => { }}
             onClick={() => handleClick()}>

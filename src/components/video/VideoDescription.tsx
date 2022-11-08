@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { getDetail } from '/@/api/frontend/video'
 import { selectScreenType, selectMinWidth } from '/@/redux/slices/screenSlice'
 import { ScreenType } from '/@/redux/interface'
-import PlayerSelector from '/@/components/player/PlayerSelector'
+import PlayerSelector from '../player/VodSelector'
 
 
 interface VideoDescriptionProps {

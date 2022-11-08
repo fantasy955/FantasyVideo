@@ -129,7 +129,7 @@ function generateRandomSubCategories(topCategory: string[]): string[] {
     let subCategories: string[] = []
     for (let i = 0; i < num; i++) {
         let top: string = topCategory[getRandomInt(0, topCategory.length - 1)]
-        if (subCategoryValues[top]) {
+        if (subCategoryValues[top].length) {
             let sub: string = subCategoryValues[top][getRandomInt(0, subCategoryValues[top].length - 1)]
             if (sub && !subCategories.find((item) => item === sub)) {
                 subCategories.push(sub)
@@ -252,7 +252,9 @@ createServer({
             video.id = Number(request.queryParams!.id)
             return {
                 code: 1,
-                data: video
+                data: {
+                    video
+                }
             }
         })
 
@@ -263,24 +265,29 @@ createServer({
                 data: {
                     resources: [
                         {
-                            source: '腾讯播放源',
-                            files: [
-                                { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' }, { name: 'a' }, { name: 'b' }, { name: 'c' }, { name: 'd' },
+                            sourceName: '腾讯播放源',
+                            sourceId: 0,
+                            episodes: Array.from({ length: 32 }).map((i, v) => {
+                                return { id: v, name: `第${v}集` }
+                            }),
+                        }, {
+                            sourceName: '无尽资源',
+                            sourceId: 1,
+                            episodes: [
+                                { id: 0, name: '第1集' }, { id: 1, name: '第二集' }, { id: 2, name: '第三集' }, { id: 3, name: '第四集' },
                             ],
                         }, {
-                            source: '无尽资源',
-                            files: [
-                                { name: '第1集' }, { name: '第二集' }, { name: '第三集' }, { name: '第四集' },
-                            ],
+                            sourceName: '红牛资源',
+                            sourceId: 2,
+                            episodes: [],
                         }, {
-                            source: '红牛资源',
-                            files: [],
+                            sourceName: '天空资源',
+                            sourceId: 3,
+                            episodes: [],
                         }, {
-                            source: '天空资源',
-                            files: [],
-                        }, {
-                            source: '闪刀资源',
-                            files: [],
+                            sourceName: '闪刀资源',
+                            sourceId: 4,
+                            episodes: [],
                         },
                     ]
                 }

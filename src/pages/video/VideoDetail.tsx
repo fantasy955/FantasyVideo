@@ -15,7 +15,7 @@ export default function VideoDetail() {
     const [video, setVideo] = useState<Video | null>(null)
     useEffect(() => {
         getDetail(id).then((res) => {
-            setVideo(res.data)
+            setVideo(res.data.video)
             setLoading(false)
         }).catch((err) => {
 

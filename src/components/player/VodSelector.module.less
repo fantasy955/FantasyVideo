@@ -21,7 +21,7 @@
     text-align: center;
 }
 
-.video__url__item a {
+.video__url__item a,a.default {
     color: black;
     display: block;
     background-color: rgba(149, 144, 144, 0.826);
@@ -30,7 +30,7 @@
     line-height: 40px;  // height + line-height实现居中
     border-radius: 10px;
 }
-.video__url__item a:hover {
+.video__url__item a.active,a:hover {
     background-color: @primary-color;
     color: white;
 }

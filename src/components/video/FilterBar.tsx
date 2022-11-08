@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next"
 import { DownOutlined, UpOutlined } from '@ant-design/icons'
 import { useEffect, useRef, useState } from "react"
 import { Divider } from "antd"
-import styles from './FilterBar.module.less'
+import styles from './css/FilterBar.module.less'
 // import './FilterBar.module.less'
 import { selectTopCategory, selectVideoMenu } from '/@/redux/slices/videoMenuSlice'
 import { useSelector } from "react-redux"
@@ -19,6 +19,7 @@ interface FilterBarProps {
         region: string,
         order: string,
     },
+    title: string | React.ReactNode
     handleSearch: (params: {}) => void
 }
 
@@ -40,7 +41,6 @@ function GetAbsoluteLocation(element: HTMLElement | null) {
     };
 }
 
-
 export default function FilterBar(props: FilterBarProps) {
     const { t } = useTranslation()
     const navigate = useNavigate()
@@ -49,7 +49,7 @@ export default function FilterBar(props: FilterBarProps) {
     const location = useLocation()
     const [showFilter, setShowFilter] = useState(false)
     const { topCategory, subCategory, order, year, region } = props.params
-    const { handleSearch } = props
+    const { handleSearch, title } = props
     const searchAreaRef = useRef<HTMLElement | null>(null)
     const searchMainAreaRef = useRef<HTMLElement | null>(null)
 
@@ -57,13 +57,13 @@ export default function FilterBar(props: FilterBarProps) {
         const clickListener = (e: MouseEvent) => {
             const titleRect = searchAreaRef.current?.getClientRects()
             const mainRect = searchMainAreaRef.current?.getClientRects()
-            console.log(GetAbsoluteLocation(searchMainAreaRef.current))
+            // console.log(GetAbsoluteLocation(searchMainAreaRef.current))
             if (mainRect?.length) {
                 const [x, y] = [e.clientX, e.clientY]
-                console.log('点击', x, y)
-                console.log('主要区域', mainRect[0])
+                // console.log('点击', x, y)
+                // console.log('主要区域', mainRect[0])
                 if (y > mainRect[0].y || x < mainRect[0].x || x > mainRect[0].x + mainRect[0].width) {
-                    console.log('隐藏')
+                    // console.log('隐藏')
                     // setShowFilter(false)
                 }
             }
@@ -75,7 +75,6 @@ export default function FilterBar(props: FilterBarProps) {
         }
     }, [])
 
-    const title = `${t(`video.order.${order}`)}` + (subCategory ? `${t(`video.subCategory.${topCategory}.${subCategory}`)}` : `${t(`video.topCategory.${topCategory}`)}`)
     const categoryArea = (
         <div className={styles.search__area}>
             <span className={styles.search__type}>
@@ -212,7 +211,11 @@ export default function FilterBar(props: FilterBarProps) {
             <div style={{ display: 'flex', justifyContent: 'space-between', height: 40, width: '100%', border: '1px solid #e8e8e8' }}>
                 <span style={{
                     margin: 4, padding: 4, backgroundColor: '#1a7edb', color: 'white', cursor: 'pointer'
-                }}>{title}</span>
+                }}>
+                    {title ? title :
+                        topCategory ? `${t(`video.order.${order}`)}` + (subCategory ? `${t(`video.subCategory.${topCategory}.${subCategory}`)}` :
+                            `${t(`video.topCategory.${topCategory}`)}`) : ''}
+                </span>
                 <span style={{
                     cursor: 'pointer', padding: 4, color: '#1a7edb', userSelect: 'none', marginBottom: showFilter ? -1 : 0,
                     backgroundColor: 'rgb(240, 242, 245)'
@@ -282,4 +285,16 @@ export default function FilterBar(props: FilterBarProps) {
             </div>
         </div >
     )
+}
+
+FilterBar.defaultProps = {
+    params: {
+        topCategory: '',
+        subCategory: '',
+        year: null,
+        region: '',
+        order: '',
+    },
+    title: '',
+    handleSearch: () => { }
 }

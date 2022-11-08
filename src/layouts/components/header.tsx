@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 import { selectVideoMenu } from '/@/redux/slices/videoMenuSlice'
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
+import SearchInput from '/@/components/video/SearchInput';
 
 export default function Header() {
     const { Header } = Layout
@@ -49,12 +50,13 @@ export default function Header() {
                 <div className={styles.part}>
                     <Menu mode="horizontal" items={videoMenuItems}
                         selectable={false}
-                        style={{ backgroundColor: 'inherit', borderBottom: 0, width: '500px', fontSize: 18 }}
+                        style={{ backgroundColor: 'inherit', borderBottom: 0, minWidth: 'max-content', fontSize: 18 }}
                         triggerSubMenuAction='hover'
                         onClick={(e) => { handelMenuClick(e) }
                         }
                     />
                 </div>
+                <SearchInput />
                 <div className={styles.part}>
                     <QuickUser />
                 </div>
