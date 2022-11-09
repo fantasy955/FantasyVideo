@@ -26,6 +26,7 @@ export default function Home() {
         getVideos({
             limit: 18
         }).then((res) => {
+            // console.log(res.data.list)
             setHomeVideos(res.data.list)
             setLoadHomeVideos(false)
         }).catch(err => {

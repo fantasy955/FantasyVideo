@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import type { UserConfig, ConfigEnv, ProxyOptions } from 'vite'
 import { resolve } from 'path'
+import { isProd, loadEnv } from './src/utils/vite'
 
 const pathResolve = (dir: string): any => {
     return resolve(__dirname, '.', dir)
@@ -12,6 +13,7 @@ const pathResolve = (dir: string): any => {
 //   plugins: [react()]
 // })
 const viteConfig = ({ mode }: ConfigEnv): UserConfig => {
+    const { VITE_PORT, VITE_OPEN, VITE_BASE_PATH, VITE_OUT_DIR, VITE_PROXY_URL } = loadEnv(mode)
 
     // alias 别名
     const alias: Record<string, string> = {
@@ -19,10 +21,28 @@ const viteConfig = ({ mode }: ConfigEnv): UserConfig => {
         assets: pathResolve('./src/assets'),
     }
 
+    let proxy: Record<string, string | ProxyOptions> = {}
+    if (VITE_PROXY_URL) {
+        proxy = {
+            '/app/api': {
+                target: VITE_PROXY_URL,
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/app/, '')
+            },
+        }
+    }
+
     return {
         plugins: [react()],
         root: process.cwd(),
         resolve: { alias },
+        base: VITE_BASE_PATH,
+        server: {
+            host: '0.0.0.0',
+            port: VITE_PORT,
+            open: VITE_OPEN,
+            proxy: proxy,
+        },
         css: {
             postcss: {
                 plugins: [

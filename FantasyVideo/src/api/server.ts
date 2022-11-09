@@ -99,7 +99,8 @@ const topCategoryValues = ['Movie', 'Animation', 'Series', 'Variety show']
 
 const subCategoryValues: Record<string, string[]> = {
     'Movie': [
-        'Action', 'Comedy', 'Science Fiction', 'Drama', 'War', 'Romance', 'Horror', 'Documentary', 'Adventure', 'Suspense', 'Crime', 'Thriller', 'Animation', 'Microfilm', 'Others'
+        'Action', 'Comedy', 'Science Fiction', 'Drama', 'War', 'Romance', 'Horror', 'Documentary', 'Adventure', 'Suspense', 'Crime',
+         'Thriller', 'Animation', 'Microfilm', 'Others'
     ],
     'Animation': [
         'Japan'
@@ -129,7 +130,7 @@ function generateRandomSubCategories(topCategory: string[]): string[] {
     let subCategories: string[] = []
     for (let i = 0; i < num; i++) {
         let top: string = topCategory[getRandomInt(0, topCategory.length - 1)]
-        if (subCategoryValues[top].length) {
+        if (subCategoryValues[top] && subCategoryValues[top].length) {
             let sub: string = subCategoryValues[top][getRandomInt(0, subCategoryValues[top].length - 1)]
             if (sub && !subCategories.find((item) => item === sub)) {
                 subCategories.push(sub)
@@ -157,6 +158,7 @@ function generateRandomCategoryTree(): Video['category'] {
     let num = getRandomInt(1, 2)
     for (let i = 0; i < num; i++) {
         let top = topCategoryValues[getRandomInt(0, topCategoryValues.length - 1)]
+        // console.log(top)
         if (!res[top]) {
             res[top] = generateRandomSubCategories([top])
         }
@@ -178,7 +180,7 @@ function getVideoArray(limit?: number, topCategory: string = '', subCategory: st
         videoTemplate.title = title
         videoTemplate.actors = actors
         videoTemplate.poster = img
-        videoTemplate.category = !topCategory ? generateRandomCategoryTree() : { topCategory: generateRandomSubCategories([topCategory]) }
+        videoTemplate.category = topCategory ?  { topCategory: generateRandomSubCategories([topCategory]) } : generateRandomCategoryTree()
         // videoTemplate.category = generateRandomCategoryTree()
         videoTemplate.description = descriptionValues[getRandomInt(0, descriptionValues.length - 1)]
         videos.push({ ...videoTemplate })
@@ -233,12 +235,12 @@ createServer({
 
         this.get("/video/index", async (db, request) => {
             const { topCategory, subCategory, order, limit, page, year, region } = request.queryParams
-            const data = getVideoArray(Number(limit), topCategory, subCategory, order)
+            const data = getVideoArray(Number(limit), topCategory ? decodeURI(topCategory):'', subCategory ? decodeURI(subCategory):'', decodeURI(order))
 
             return {
                 code: 1,
                 data: {
-                    list: getVideoArray(Number(limit), topCategory, subCategory, order),
+                    list: data,
                     currentPage: page,
                     totalPage: Math.ceil(videoSize / limit),
                     total: videoSize
