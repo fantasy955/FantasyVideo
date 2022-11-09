@@ -50,7 +50,7 @@ export default function Header() {
                 <div className={styles.part}>
                     <Menu mode="horizontal" items={videoMenuItems}
                         selectable={false}
-                        style={{ backgroundColor: 'inherit', borderBottom: 0, minWidth: 'max-content', fontSize: 18 }}
+                        style={{ backgroundColor: 'inherit', borderBottom: 0, minWidth: '400px', fontSize: 18 }}
                         triggerSubMenuAction='hover'
                         onClick={(e) => { handelMenuClick(e) }
                         }

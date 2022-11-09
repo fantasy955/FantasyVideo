@@ -29,6 +29,11 @@ const viteConfig = ({ mode }: ConfigEnv): UserConfig => {
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/app/, '')
             },
+            '/app/public': {
+                target: VITE_PROXY_URL,
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/app\/public/, '')
+            }
         }
     }
 

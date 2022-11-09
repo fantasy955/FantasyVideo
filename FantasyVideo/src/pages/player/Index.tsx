@@ -5,6 +5,7 @@ import VodSelector from "/@/components/player/VodSelector";
 import { getDetail } from '/@/api/frontend/video'
 import { Divider } from "antd";
 import LocationBar from "/@/components/LocationBar";
+import HLS from 'hls.js'
 
 export function loader({ params }) {
     const { sourceID, videoID, episodeID } = params
@@ -23,7 +24,7 @@ export default function Index() {
     const [video, setVideo] = useState<Video | null>(routeState ? routeState.video : null)
     useEffect(() => {
         playerRef.current!.focus()
-    })
+    }, [])
 
     useEffect(() => {
         if (!resource) {
@@ -50,7 +51,9 @@ export default function Index() {
     return (
         <Content>
             <LocationBar />
-            <div ref={(c) => { playerRef.current = c }} style={{ width: '100%', height: 800, backgroundColor: 'black' }}></div>
+            <div ref={(c) => { playerRef.current = c }} style={{ width: '100%', height: '600px', backgroundColor: 'black' }}>
+                <iframe src={`/app/api/player/vod/${videoID}`} style={{width: '100%', height: '100%'}} scrolling='no'></iframe>
+            </div>
             <Divider></Divider>
             {
                 video ?
