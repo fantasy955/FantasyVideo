@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-./dev_assets
+dev_assets
 
 ./config/config.js
 ./FantasyVideo/logs
