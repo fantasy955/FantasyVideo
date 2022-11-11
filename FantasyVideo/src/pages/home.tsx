@@ -26,11 +26,10 @@ export default function Home() {
         getVideos({
             limit: 18
         }).then((res) => {
-            // console.log(res.data.list)
+            console.log(res.data.list)
             setHomeVideos(res.data.list)
             setLoadHomeVideos(false)
-        }).catch(err => {
-        })
+        }).catch(err => { console.log(err) })
     }, [])
 
     useEffect(() => {

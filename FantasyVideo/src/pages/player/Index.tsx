@@ -24,15 +24,6 @@ export default function Index() {
     const [video, setVideo] = useState<Video | null>(routeState ? routeState.video : null)
     useEffect(() => {
         playerRef.current!.focus()
-        // var video = document.getElementById('video2') as HTMLMediaElement;
-        // if (HLS.isSupported()) {
-        //     var hls = new HLS();
-        //     hls.loadSource('https://yunqivedio.alicdn.com/2017yq/v2/0x0/96d79d3f5400514a6883869399708e11/96d79d3f5400514a6883869399708e11.m3u8');
-        //     hls.attachMedia(video);
-        //     hls.on(HLS.Events.MANIFEST_PARSED, function () {
-        //         video.play();
-        //     });
-        // }
     }, [])
 
     useEffect(() => {
@@ -61,11 +52,8 @@ export default function Index() {
         <Content>
             <LocationBar />
             <div ref={(c) => { playerRef.current = c }} style={{ width: '100%', height: '600px', backgroundColor: 'black' }}>
-                <iframe src={`/app/api/player/vod/${videoID}`} style={{ width: '100%', height: '100%' }} scrolling='no'></iframe>
+                <iframe src={`/app/api/player/vod/${videoID}`} style={{ width: '100%', height: '550px' }} scrolling='yes'></iframe>
             </div>
-            {/* <div style={{ width: '96%', margin: '30px auto' }}>
-                <video id="video2" controls loop={false} width="100%"></video>
-            </div> */}
             <Divider></Divider>
             {
                 video ?

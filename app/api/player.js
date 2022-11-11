@@ -7,6 +7,41 @@ const router = new Router({
     prefix: '/api/player'
 })
 
+router.get('/index', (ctx) => {
+    ctx.body = {
+        code: 1,
+        data: {
+            resources: [
+                {
+                    sourceName: '腾讯播放源',
+                    sourceId: 0,
+                    episodes: Array.from({ length: 32 }).map((i, v) => {
+                        return { id: v, name: `第${v}集` }
+                    }),
+                }, {
+                    sourceName: '无尽资源',
+                    sourceId: 1,
+                    episodes: [
+                        { id: 0, name: '第1集' }, { id: 1, name: '第二集' }, { id: 2, name: '第三集' }, { id: 3, name: '第四集' },
+                    ],
+                }, {
+                    sourceName: '红牛资源',
+                    sourceId: 2,
+                    episodes: [],
+                }, {
+                    sourceName: '天空资源',
+                    sourceId: 3,
+                    episodes: [],
+                }, {
+                    sourceName: '闪刀资源',
+                    sourceId: 4,
+                    episodes: [],
+                },
+            ]
+        }
+    }
+})
+
 router.get('/vod/:id', (ctx) => {
     console.log(ctx.params.id)
     ctx.type = 'text/html'

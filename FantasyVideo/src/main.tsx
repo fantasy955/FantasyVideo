@@ -14,7 +14,7 @@ import { BrowserRouter, RouterProvider } from 'react-router-dom'
 import store from '/@/redux/store'
 import { Provider } from 'react-redux'
 // fake api
-import '/@/api/server'
+// import '/@/api/server'
 // i18n
 // css
 import './index.less'

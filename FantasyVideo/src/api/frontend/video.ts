@@ -1,6 +1,7 @@
 import createAxios from '/@/utils/axios'
 
-const controllerUrl = '/api/video/'
+// 以/开头，表示根路径
+const controllerUrl = '/app/api/video/'
 
 export function getVideos(params: {}){
     return createAxios({
@@ -12,7 +13,7 @@ export function getVideos(params: {}){
 
 export function getCategories(){
     return createAxios({
-        url: controllerUrl + 'category/index',
+        url: controllerUrl + 'menu/index',
         params: null,
         method: 'get',
     }) as ApiPromise

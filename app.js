@@ -30,7 +30,7 @@ app.use(ratelimit({
     reset: 'Rate-Limit-Reset',
     total: 'Rate-Limit-Total'
   },
-  max: 100,
+  max: 1000,
   disableHeader: false,
   whitelist: (ctx) => {
     // some logic that returns a boolean

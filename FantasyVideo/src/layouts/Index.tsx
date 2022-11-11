@@ -3,8 +3,9 @@ import { useEffect } from "react"
 import { signIn } from '/@/api/frontend/user'
 import { useDispatch, useSelector } from 'react-redux'
 import { sighInSucceed } from '/@/redux/slices/userSlice'
-import { setWidth } from '/@/redux/slices/screenSlice'
-import { selectScreenType } from '/@/redux/slices/screenSlice'
+import { setWidth, selectScreenType } from '/@/redux/slices/screenSlice'
+import { setMenu } from '/@/redux/slices/videoMenuSlice'
+import { getCategories } from '/@/api/frontend/video'
 
 export default function Index() {
     const dispatch = useDispatch()
@@ -14,21 +15,25 @@ export default function Index() {
     useEffect(() => {
         let timer: NodeJS.Timeout | null = null
         window.onresize = () => {
-            if (timer){
+            if (timer) {
                 clearTimeout(timer)
             }
-            timer = setTimeout(()=>{
+            timer = setTimeout(() => {
                 dispatch(setWidth(document.body.clientWidth))
                 // console.log(document.body.clientWidth)
             }, 100)
         }
         dispatch(setWidth(document.body.clientWidth))
 
-        signIn('post', token).then((res) => {
-            dispatch(sighInSucceed(res.data))
-        })
-            .catch((err) => {
-            })
+        // signIn('post', token).then((res) => {
+        //     dispatch(sighInSucceed(res.data))
+        // })
+        //     .catch((err) => {
+        //     })
+
+        getCategories().then((res) => {
+            dispatch(setMenu(res.data))
+        }).catch((err) => { })
     }, [])
 
     return (

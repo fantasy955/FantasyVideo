@@ -44,7 +44,7 @@ export const videoCategoryMenuSlice = createSlice({
     initialState: initalVideoMenu(),
     reducers: {
         setMenu: (state, action) => {
-            state.value = action.payload
+            Object.assign(state, action.payload)
         }
     }
 })

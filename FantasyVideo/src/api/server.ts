@@ -1,4 +1,4 @@
-import { Server, Model, Factory, hasMany, RestSerializer, createServer } from 'miragejs'
+import { Server, Model, Factory, hasMany, RestSerializer, createServer } from 'miragejs'    
 import faker from 'faker'
 import seedrandom from 'seedrandom'
 import { UserInfo } from '/@/redux/interface/index'

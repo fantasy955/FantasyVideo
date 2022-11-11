@@ -33,6 +33,7 @@
   "dependencies": {
     "@koa/cors": "^4.0.0",
     "basic-auth": "^2.0.1",
+    "faker": "^6.6.6",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
@@ -42,6 +43,7 @@
     "module-alias": "^2.2.2",
     "nodemon": "^2.0.20",
     "require-directory": "^2.1.1",
+    "seedrandom": "^3.0.5",
     "sequelize": "^6.25.5"
   }
 }
