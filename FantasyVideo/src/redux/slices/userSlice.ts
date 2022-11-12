@@ -1,7 +1,13 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit'
 import type { ReduxState, UserInfo } from "/@/redux/interface";
+import { Local } from '/@/utils/storage'
+import { USER_INFO } from '../constant/cacheKey'
 
 const initialUserInfo: () => UserInfo = () => {
+  if (Local.get(USER_INFO)) {
+    return Local.get(USER_INFO) as UserInfo
+  }
+
   return {
     id: 1,
     username: 'tom',
@@ -19,7 +25,6 @@ const initialUserInfo: () => UserInfo = () => {
     motto: '',
     token: '',
     refreshToken: '',
-    signIn: false,
   }
 }
 
@@ -31,7 +36,12 @@ export const userSlice = createSlice({
   reducers: {
     sighInSucceed: (state, action) => {
       Object.assign(state, action.payload)
-      state.signIn = true
+      Local.set(USER_INFO, action.payload)
+    },
+    logOut: (state) => {
+      state.refreshToken = ''
+      state.token = ''
+      Local.set(USER_INFO, state)
     },
     removeToken: state => {
       state.token = "",
@@ -43,13 +53,13 @@ export const userSlice = createSlice({
   }
 })
 // 每个 case reducer 函数会生成对应的 Action creators
-export const { sighInSucceed, removeToken, setToken } = userSlice.actions
+export const { sighInSucceed, removeToken, setToken, logOut } = userSlice.actions
 
-const userinfo = (state: ReduxState) => state.userinfo
+export const userinfo = (state: ReduxState) => state.userinfo
 
-export const selectSignInState = createSelector(
+export const selectRefreshToken = createSelector(
   userinfo,
-  (state) => state.signIn
+  (state) => state.refreshToken
 )
 
 export const selectUserToken = createSelector(

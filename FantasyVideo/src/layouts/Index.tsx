@@ -25,7 +25,10 @@ export default function Index() {
         }
         dispatch(setWidth(document.body.clientWidth))
 
-        // signIn('post', token).then((res) => {
+        // signIn('post', token, {
+        //     id: 1,
+        //     keeptime: false
+        // }).then((res) => {
         //     dispatch(sighInSucceed(res.data))
         // })
         //     .catch((err) => {

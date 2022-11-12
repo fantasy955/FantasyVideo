@@ -40,6 +40,18 @@ const findMembers = function (instance, {
 }
 
 // 颁布令牌
+const generateRefreshToken = function (uid, scope) {
+  const secretKey = global.config.security.secretKey;
+  const expiresInRfresh = global.config.security.expiresInRfresh;
+  const token = jwt.sign({
+    uid,
+    scope
+  }, secretKey, {
+    expiresIn: expiresInRfresh
+  })
+  return token
+}
+
 const generateToken = function (uid, scope) {
   const secretKey = global.config.security.secretKey;
   const expiresIn = global.config.security.expiresIn;
@@ -55,4 +67,5 @@ const generateToken = function (uid, scope) {
 module.exports = {
   findMembers,
   generateToken,
+  generateRefreshToken,
 }

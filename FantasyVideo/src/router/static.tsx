@@ -7,7 +7,9 @@ import VideoDetail, { loader as VideoDetailLoader } from '../pages/video/VideoDe
 import path from 'path'
 import SearchIndex, { loader as searchLoader } from '../pages/video/SearchIndex'
 import PlayerIndex, { loader as PlayerLoader } from '/@/pages/player/Index'
-
+// import UserLogin from '../pages/user/login'
+import { lazy } from 'react'
+const UserLogin = lazy(() => import('/@/pages/user/login'));
 
 const staticRoutes: Array<RouteObject> = [
     {
@@ -55,6 +57,11 @@ staticRoutes[0].children!.push(
         }
     })
 )
+
+staticRoutes.push({
+    path: '/login',
+    element: <UserLogin></UserLogin>
+})
 
 
 export { staticRoutes }

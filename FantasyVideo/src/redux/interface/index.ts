@@ -15,7 +15,6 @@ export interface UserInfo {
     motto: string
     token: string
     refreshToken: string,
-    signIn?: boolean,
 }
 
 export interface SiteConfig {
