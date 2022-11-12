@@ -1,8 +1,7 @@
 import { Layout } from "antd";
-import { Content } from "antd/lib/layout/layout";
 
 export default function UserLogin() {
-
+    const { Content } = Layout
     return (
         <Layout>
             <Content>

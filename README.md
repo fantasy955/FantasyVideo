@@ -33,3 +33,9 @@ koa初始化，数据库初始化，token生成等工具函数
 - 自动添加token
 
 登录后，将用户redux状态持久化到localStorage，通过`Axios.interceptors.request.use`拦截请求，为请求添加token。
+
+## redux，redux-toolkit状态管理
+
+- localStorage持久化
+
+自动将用户信息、观看记录用localStorage保存；状态初始化时自动加载。

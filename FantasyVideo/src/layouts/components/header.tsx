@@ -2,7 +2,7 @@ import { Layout, Menu } from 'antd';
 import type { MenuProps } from 'antd'
 //import type 是用来协助进行类型检查和声明的，在运行时是完全不存在的。
 import QuickUser from './header/QuickUser';
-import styles from './header.module.css'
+import styles from './header/css/header.module.css'
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 import { selectVideoMenu } from '/@/redux/slices/videoMenuSlice'
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import SearchInput from '/@/components/video/SearchInput';
+import History from './header/History';
 
 export default function Header() {
     const { Header } = Layout
@@ -45,9 +46,9 @@ export default function Header() {
     }, [videoMenu])
 
     return (
-        <Header style={{ position: 'fixed', zIndex: 99, width: '100%'}}>
-            <div className={styles.main}>   
-                <div className={styles.part}>
+        <Header style={{ position: 'fixed', zIndex: 99, width: '100%' }}>
+            <div className={styles.main}>
+                <div className={styles.header__item}>
                     <Menu mode="horizontal" items={videoMenuItems}
                         selectable={false}
                         style={{ backgroundColor: 'inherit', borderBottom: 0, minWidth: '400px', fontSize: 18 }}
@@ -57,7 +58,8 @@ export default function Header() {
                     />
                 </div>
                 <SearchInput />
-                <div className={styles.part}>
+                <div className={styles.header__item}>
+                    <History />
                     <QuickUser />
                 </div>
             </div>

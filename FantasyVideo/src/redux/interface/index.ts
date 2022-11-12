@@ -52,12 +52,22 @@ export interface VideoFilter {
     total_page: number | null,
 }
 
+export interface PlayingRecord {
+    videoID: number
+    sourceID: number
+    episodeID: number
+    time: number
+}
+export type PlayingHistory = {
+    records: PlayingRecord[]
+}
 
 export interface ReduxState {
     userinfo: UserInfo
     videoMenu: VideoMenu
     screenInfo: ScreenInfo
     videoFilter: VideoFilter
+    playingHistory: PlayingHistory
 }
 
 export type VideoMenu = Record<string, string[]>

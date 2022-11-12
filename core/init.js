@@ -43,6 +43,7 @@ class InitManager {
   static initStatic(path = ''){
     const target = path || process.cwd() + '/public'
     this.app.use(staticResource(target))
+    this.app.use(staticResource(process.cwd() + '/dist'))
   }
 }
 

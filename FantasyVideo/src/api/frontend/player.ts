@@ -1,6 +1,6 @@
 import createAxios from "/@/utils/axios";
 
-const controllerUrl = '/app/api/player/'
+const controllerUrl = '/api/player/'
 
 export function index(id: number) {
     return createAxios({

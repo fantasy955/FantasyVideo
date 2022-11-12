@@ -5,7 +5,8 @@ import VodSelector from "/@/components/player/VodSelector";
 import { getDetail } from '/@/api/frontend/video'
 import { Divider } from "antd";
 import LocationBar from "/@/components/LocationBar";
-import HLS from 'hls.js'
+import { playingHistory, selectHistoryRecords, updateRecord } from '/@/redux/slices/playingHistorySlice'
+import { useSelector, useDispatch } from "react-redux";
 
 export function loader({ params }) {
     const { sourceID, videoID, episodeID } = params
@@ -14,6 +15,7 @@ export function loader({ params }) {
 
 export default function Index() {
     const location = useLocation()
+    const dispatch = useDispatch()
     const { sourceID, videoID, episodeID } = useLoaderData()
     const playerRef = useRef<HTMLElement | null>(null)
     const routeState = location.state
@@ -22,6 +24,7 @@ export default function Index() {
     // 媒体源名称
     const [source, setSource] = useState<string | null>(routeState ? routeState.source : null)
     const [video, setVideo] = useState<Video | null>(routeState ? routeState.video : null)
+    const playingHisoryRecords = useSelector(selectHistoryRecords)
     useEffect(() => {
         playerRef.current!.focus()
     }, [])
@@ -46,13 +49,19 @@ export default function Index() {
 
     useEffect(() => {
         console.log(`加载第${episodeID}集视频`)
+        dispatch(updateRecord({
+            videoID: videoID,
+            episodeID: episodeID,
+            sourceID: sourceID,
+            time: Number(new Date())
+        }))
     }, [episodeID])
 
     return (
         <Content>
             <LocationBar />
             <div ref={(c) => { playerRef.current = c }} style={{ width: '100%', height: '600px', backgroundColor: 'black' }}>
-                <iframe src={`/app/api/player/vod/${videoID}`} style={{ width: '100%', height: '550px' }} scrolling='yes'></iframe>
+                <iframe src={`/api/player/vod/${videoID}`} style={{ width: '100%', height: '550px' }} scrolling='yes'></iframe>
             </div>
             <Divider></Divider>
             {

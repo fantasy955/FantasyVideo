@@ -4,6 +4,8 @@ import type { UserConfig, ConfigEnv, ProxyOptions } from 'vite'
 import { resolve } from 'path'
 import { isProd, loadEnv } from './src/utils/vite'
 
+// process.env.NODE_ENV === 'production'
+
 const pathResolve = (dir: string): any => {
     return resolve(__dirname, '.', dir)
 }
@@ -24,15 +26,13 @@ const viteConfig = ({ mode }: ConfigEnv): UserConfig => {
     let proxy: Record<string, string | ProxyOptions> = {}
     if (VITE_PROXY_URL) {
         proxy = {
-            '/app/api': {
+            '/api': {
                 target: VITE_PROXY_URL,
                 changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/app/, '')
             },
-            '/app/public': {
+            '/public': {
                 target: VITE_PROXY_URL,
                 changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/app\/public/, '')
             },
             '/storage': {
                 target: VITE_PROXY_URL,
@@ -48,6 +48,7 @@ const viteConfig = ({ mode }: ConfigEnv): UserConfig => {
         base: VITE_BASE_PATH,
         server: {
             host: '0.0.0.0',
+            // host: '43.139.126.249',
             port: VITE_PORT,
             open: VITE_OPEN,
             proxy: proxy,

@@ -1,7 +1,7 @@
 import createAxios from '/@/utils/axios'
 
 // 以/开头，表示根路径
-const controllerUrl = '/app/api/video/'
+const controllerUrl = '/api/video/'
 
 export function getVideos(params: {}){
     return createAxios({
