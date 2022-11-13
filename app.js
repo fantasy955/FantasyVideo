@@ -3,6 +3,7 @@ const InitManager = require('./core/init')
 const parser = require('koa-bodyparser')
 const cors = require('@koa/cors');
 const ratelimit = require('koa-ratelimit');
+const fs = require('fs')
 
 require('module-alias/register')
 
@@ -41,6 +42,15 @@ app.use(ratelimit({
 }));
 
 InitManager.initCore(app)
+
+app.use(async (ctx, next) => {
+  await next();   
+  if (!ctx.body) {  
+    ctx.type = "html";
+    ctx.body = fs.readFileSync( `${process.cwd()}/dist/index.html`)
+  }
+})
+
 
 app.listen(5000, () => {
   console.log('Koa is listening in http://localhost:5000')

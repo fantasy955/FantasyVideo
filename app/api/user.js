@@ -28,7 +28,7 @@ router.post('/signin', async (ctx) => {
             birthday: '1998-10-24',
             money: 0,
             score: 0,
-            avatar: 'http://localhost:5000/storage/user/defalut_avatar.jpg',
+            avatar: 'http://43.139.126.249:5000/storage/user/defalut_avatar.jpg',
             lastlogintime: '',
             lastloginip: '',
             jointime: '',

@@ -39,3 +39,4 @@ koa初始化，数据库初始化，token生成等工具函数
 - localStorage持久化
 
 自动将用户信息、观看记录用localStorage保存；状态初始化时自动加载。
+
