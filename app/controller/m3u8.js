@@ -1,4 +1,6 @@
+const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 const ffmpeg = require("fluent-ffmpeg");
+ffmpeg.setFfmpegPath(ffmpegPath);
 const log = require('single-line-log').stdout;
 const fs = require("fs");
 const { resolve } = require("path");
