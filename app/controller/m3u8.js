@@ -67,7 +67,9 @@ class m3u8ToMp4Converter {
 
 const converter = new m3u8ToMp4Converter();
 
-async function downloadMedia(opt) {
+
+// 不能将其作为一个async函数，否则请求只能在下载完成时结束
+function downloadMedia(opt) {
     // 测试视频，如果链接失效的话就自己找一个
     let url = opt.url || "https://www.hkg.haokan333.com/201903/07/qM3F7ntN/800kb/hls/index.m3u8";
     let output = opt.output || 'video';
@@ -79,19 +81,22 @@ async function downloadMedia(opt) {
         });
     }
 
-    await new Promise(async (resolve, reject) => {
+    (async function () {
         try {
             console.log("准备下载...");
+
             await converter
                 .setInputFile(url)
                 .setOutputFile(path.join(output, filename))
                 .start();
 
-            resolve('ok')
+            console.log("下载完成!");
+
+            if (typeof callback === 'function') callback();
         } catch (error) {
-            resolve(new Error("哎呀，出错啦! 检查一下参数传对了没喔。", error));
+            throw new Error("哎呀，出错啦! 检查一下参数传对了没喔。", error);
         }
-    })
+    })();
 }
 
 module.exports = { downloadMedia };
