@@ -50,11 +50,11 @@ class m3u8ToMp4Converter {
                     reject(new Error(error));
                 })
                 .on('progress', function (progress) {
-                    log('下载进度: 已完成 ' + (progress.percent).toFixed(2) + '%。');
+                    // log('下载进度: 已完成 ' + (progress.percent).toFixed(2) + '%。');
                 })
                 .on("end", () => {
-                    log('下载进度: 已完成 100%。\n');
-                    console.log('=========================');
+                    // log('下载进度: 已完成 100%。\n');
+                    // console.log('=========================');
                     resolve();
                 })
                 .outputOptions("-c copy")
