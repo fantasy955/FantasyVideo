@@ -47,7 +47,7 @@ class m3u8ToMp4Converter {
 
             ffmpeg(this.M3U8_FILE)
                 .on("error", error => {
-                    console.log('下载失败！', error.meessage)
+                    console.log('下载失败！', error.message)
                     reject(new Error(error));
                 })
                 .on('progress', function (progress) {
