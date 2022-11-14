@@ -35,7 +35,6 @@
     "@koa/cors": "^4.0.0",
     "basic-auth": "^2.0.1",
     "faker": "^6.6.6",
-    "ffmpeg-installer": "^1.0.2",
     "fluent-ffmpeg": "^2.1.2",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
