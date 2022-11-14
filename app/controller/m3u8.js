@@ -43,18 +43,19 @@ class m3u8ToMp4Converter {
                 return;
             }
 
-            // console.log('=========================');
+            console.log('=========================');
 
             ffmpeg(this.M3U8_FILE)
                 .on("error", error => {
+                    console.log('下载失败！', error.meessage)
                     reject(new Error(error));
                 })
                 .on('progress', function (progress) {
-                    // log('下载进度: 已完成 ' + (progress.percent).toFixed(2) + '%。');
+                    log('下载进度: 已完成 ' + (progress.percent).toFixed(2) + '%。');
                 })
                 .on("end", () => {
-                    // log('下载进度: 已完成 100%。\n');
-                    // console.log('=========================');
+                    log('下载进度: 已完成 100%。\n');
+                    console.log('=========================');
                     resolve();
                 })
                 .outputOptions("-c copy")
@@ -83,14 +84,14 @@ function downloadMedia(opt) {
 
     (async function () {
         try {
-            // console.log("准备下载...");
+            console.log("准备下载...");
 
             await converter
                 .setInputFile(url)
                 .setOutputFile(path.join(output, filename))
                 .start();
 
-            // console.log("下载完成!");
+            console.log("下载完成!");
 
             if (typeof callback === 'function') callback();
         } catch (error) {
