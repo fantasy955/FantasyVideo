@@ -10,15 +10,15 @@ router.get('/download', async (ctx) => {
     const { title, filename } = ctx.query
     if (target.endsWith('.m3u8')) {
         try {
-            ctx.body = {
-                code: 1,
-                msg: '添加下载任务',
-            }
             await m3u8.downloadMedia({
                 url: target,
                 output: `${process.cwd()}/public/storage/m3u8/${title}`,
                 filename: filename,
             })
+            ctx.body = {
+                code: 1,
+                msg: '添加下载任务',
+            }
         } catch (error) {
             ctx.body = {
                 code: 0,
