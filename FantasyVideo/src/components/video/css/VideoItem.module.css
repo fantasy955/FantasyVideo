@@ -1,6 +1,31 @@
-@media (max-width: 1299px){
-    .video{
-        width: 160px !important;
-        height: 270px !important;
+.video {
+    width: 160px !important;
+    height: 270px !important;
+    overflow: hidden;
+}
+.video img {
+    width: 160px !important;
+    height: 220px !important;
+}
+
+.video .title {
+    height: 40px;
+    font-size: 14px;
+}
+
+@media (max-width: 1199px) {
+    .video {
+        width: 80px !important;
+        height: 135px !important;
+        overflow: hidden;
+    }
+    .video img {
+        width: 80px !important;
+        height: 105px !important;
+    }
+    .video .title {
+        height: 20px;
+        font-size: 10px;
     }
 }
+
