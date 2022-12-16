@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { DownOutlined, UpOutlined } from '@ant-design/icons'
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Divider } from "antd"
 import styles from './css/FilterBar.module.less'
 // import './FilterBar.module.less'
