@@ -16,7 +16,7 @@ export default function Header() {
     const { Header } = Layout
     const { t } = useTranslation()
     const navigate = useNavigate()
-    const handelMenuClick = (info) => {
+    const handelMenuClick = (info: any) => {
         const { key } = info
         navigate(`${key}`)
     }

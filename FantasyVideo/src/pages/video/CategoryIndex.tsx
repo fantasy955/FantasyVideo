@@ -13,7 +13,7 @@ import FilterBar from '/@/components/video/FilterBar'
 //     subCategory: string,
 // }
 
-export function loader({ params }) {
+export function loader({ params }: any) {
     return {
         topCategory: params.topCategory,
         subCategory: params.subCategory ? params.subCategory : '',
@@ -22,7 +22,7 @@ export function loader({ params }) {
 
 export default function CategoryIndex() {
     const { Header, Content, Footer } = Layout
-    const { topCategory, subCategory } = useLoaderData()
+    const { topCategory, subCategory } = useLoaderData() as any
     const navigate = useNavigate()
     const location = useLocation()
     const [searchParams, setSearchParams] = useSearchParams();
@@ -61,8 +61,8 @@ export default function CategoryIndex() {
         const withSearch = order ? true : year ? true : region ? true : false
         let to = `/${top}${sub ? `/${sub}` : ''}` +
             `${withSearch ? '?' + `${order ? 'order=' + order + '&' : ''}${year ? 'year=' + year + '&' : ''}${region ? 'region=' + region + '&' : ''}` : ''}`
-        if(to.endsWith('&')){
-            to = to.substring(0, to.length-1)
+        if (to.endsWith('&')) {
+            to = to.substring(0, to.length - 1)
         }
         navigate(to)
     }

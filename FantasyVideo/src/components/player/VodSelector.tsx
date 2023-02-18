@@ -40,7 +40,7 @@ export default function VodSelector(props: VodSelecterProps) {
                             disabled: !resource.episodes.length,
                             children: <ul>
                                 {
-                                    resource.episodes.map((episode) => {
+                                    resource.episodes.map((episode: any) => {
                                         return <li className={styles.video__url__item} key={`${episode.id}`}>
                                             <NavLink
                                                 className={({ isActive }) =>

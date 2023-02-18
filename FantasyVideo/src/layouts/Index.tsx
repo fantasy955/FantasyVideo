@@ -9,7 +9,7 @@ import { getCategories } from '/@/api/frontend/video'
 
 export default function Index() {
     const dispatch = useDispatch()
-    const token = useSelector((state) => state.userinfo.token)
+    const token = useSelector((state: any) => state.userinfo.token)
     const screenType = useSelector(selectScreenType)
 
     useEffect(() => {

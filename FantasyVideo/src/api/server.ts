@@ -1,5 +1,5 @@
 import { Server, Model, Factory, hasMany, RestSerializer, createServer } from 'miragejs'    
-import faker from 'faker'
+// import faker from 'faker'
 import seedrandom from 'seedrandom'
 import { UserInfo } from '/@/redux/interface/index'
 import { request } from 'http'
@@ -31,7 +31,7 @@ if (useSeededRNG) {
     }
 
     rng = seedrandom(randomSeedString)
-    faker.seed(seedDate.getTime())
+    // faker.seed(seedDate.getTime())
 }
 
 const userData: UserInfo = {
@@ -234,7 +234,7 @@ createServer({
         })
 
         this.get("/video/index", async (db, request) => {
-            const { topCategory, subCategory, order, limit, page, year, region } = request.queryParams
+            const { topCategory, subCategory, order, limit, page, year, region } = request.queryParams as any
             const data = getVideoArray(Number(limit), topCategory ? decodeURI(topCategory):'', subCategory ? decodeURI(subCategory):'', decodeURI(order))
 
             return {
@@ -261,7 +261,7 @@ createServer({
         })
 
         this.get("/player/index", (db, request) => {
-            const { id } = request.queryParams
+            const { id } = request.queryParams as any
             return {
                 code: 1,
                 data: {

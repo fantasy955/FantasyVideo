@@ -10,7 +10,7 @@ export default function LocationBar(props: {
     const loction = useLocation()
     const breadcrumbItems = [(
         <Breadcrumb.Item key={'/'}>
-            <Link to={'/'}>{t('Home')}</Link>
+            <Link to={'/'}>{t('Home') as string}</Link>
         </Breadcrumb.Item>
     )]
     const pathSnippets = location.pathname.split('/').filter(i => i);
@@ -25,7 +25,7 @@ export default function LocationBar(props: {
             topCategory = decodeURI(pathSnippets[1])
         }
         if (props.title) title = decodeURI(props.title)
-    }else if(pathSnippets[0] === 'search'){
+    } else if (pathSnippets[0] === 'search') {
         breadcrumbItems.push(
             (
                 <Breadcrumb.Item key={'search'}>
@@ -33,8 +33,8 @@ export default function LocationBar(props: {
                 </Breadcrumb.Item>
             )
         )
-    }else if (pathSnippets[0] === 'vod') {
-        
+    } else if (pathSnippets[0] === 'vod') {
+
     } else { // 类别首页
         if (pathSnippets.length === 1) { // 一级类别首页
             topCategory = decodeURI(pathSnippets[0])

@@ -11,7 +11,7 @@ export default function content() {
     // 当处在react组件环境下时，这两种方法可以使用
     // 但是处在hook函数时，
     // const userInfo = store.getState().userinfo
-    const userInfo = useSelector((state) => state.userinfo)
+    const userInfo = useSelector((state: any) => state.userinfo)
     const dispatch = useDispatch()
     // const screenType = useSelector(selectScreenType)
     const minWidth = useSelector(selectMinWidth)
@@ -21,7 +21,7 @@ export default function content() {
         componentKey: location.pathname,
     })
 
-    const handleClick = (e) => {
+    const handleClick = () => {
         console.log(userInfo)
     }
 

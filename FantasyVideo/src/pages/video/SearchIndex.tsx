@@ -4,7 +4,7 @@ import LocationBar from "/@/components/LocationBar"
 import { Divider } from 'antd'
 import FilterBar from "/@/components/video/FilterBar"
 
-export function loader({ request }) {
+export function loader({ request }: any) {
     const url = new URL(request.url)
     const keywords = url.searchParams.get('keywords')
     if (!keywords) {
@@ -14,7 +14,7 @@ export function loader({ request }) {
 }
 
 export default function SearchIndex() {
-    const { keywords } = useLoaderData()
+    const { keywords } = useLoaderData() as any
     return (
         <div>
             <LocationBar></LocationBar>

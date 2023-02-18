@@ -8,7 +8,7 @@ import LocationBar from "/@/components/LocationBar";
 import { playingHistory, selectHistoryRecords, updateRecord } from '/@/redux/slices/playingHistorySlice'
 import { useSelector, useDispatch } from "react-redux";
 
-export function loader({ params }) {
+export function loader({ params }: any) {
     const { sourceID, videoID, episodeID } = params
     return { sourceID, videoID, episodeID }
 }
@@ -16,7 +16,7 @@ export function loader({ params }) {
 export default function Index() {
     const location = useLocation()
     const dispatch = useDispatch()
-    const { sourceID, videoID, episodeID } = useLoaderData()
+    const { sourceID, videoID, episodeID } = useLoaderData() as any
     const playerRef = useRef<HTMLElement | null>(null)
     const routeState = location.state
     // 该媒体源下的所有资源

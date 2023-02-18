@@ -15,7 +15,6 @@ interface CategoryIndexState {
 }
 
 export default function Home() {
-    const signInState = useSelector(createUserSelector('signIn'))
     const { t } = useTranslation()
     const token = useSelector(createUserSelector('token')) as string
     const [homeVideos, setHomeVideos] = useState<Video[]>([])

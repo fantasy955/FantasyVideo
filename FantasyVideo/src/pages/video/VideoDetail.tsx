@@ -5,12 +5,12 @@ import { getDetail } from '/@/api/frontend/video'
 import LocationBar from '/@/components/LocationBar'
 import VideoDescription from '/@/components/video/VideoDescription'
 
-export async function loader({ params }) {
+export async function loader({ params }: any) {
     return { id: params.id }
 }
 
 export default function VideoDetail() {
-    const { id } = useLoaderData()
+    const { id } = useLoaderData() as any
     const [loading, setLoading] = useState(true)
     const [video, setVideo] = useState<Video | null>(null)
     useEffect(() => {

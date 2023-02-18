@@ -4,7 +4,7 @@ import styles from './css/SearchInput.module.less'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { SearchOutlined } from '@ant-design/icons'
 
-export function action({ request, params }) {
+export function action({ request, params }: any) {
 
 }
 
@@ -38,7 +38,9 @@ export default function SearchInput() {
     }
 
     useEffect(() => {
-        setKeywords(initKeywords)
+        if (initKeywords) {
+            setKeywords(initKeywords)
+        }
     }, [initKeywords])
 
     useEffect(() => {

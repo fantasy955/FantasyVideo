@@ -2,7 +2,7 @@ import { useRouteError, useNavigate } from "react-router-dom";
 import { useEffect } from 'react'
 
 export default function ErrorPage() {
-  const error = useRouteError();
+  const error = useRouteError() as any;
   const navigate = useNavigate();
   let timer: null | NodeJS.Timer = null
   useEffect(() => {

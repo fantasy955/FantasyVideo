@@ -15,12 +15,12 @@ interface FilterBarProps {
     params: {
         topCategory: string,
         subCategory: string,
-        year: number | null,
-        region: string,
-        order: string,
+        year: number | null | string,
+        region: string | null,
+        order: string | null,
     },
     title: string | React.ReactNode
-    handleSearch: (params: {}) => void
+    handleSearch: (params: any) => void
 }
 
 function GetAbsoluteLocation(element: HTMLElement | null) {
@@ -31,7 +31,7 @@ function GetAbsoluteLocation(element: HTMLElement | null) {
     var offsetLeft = element.offsetLeft;
     var offsetWidth = element.offsetWidth;
     var offsetHeight = element.offsetHeight;
-    while (element = element.offsetParent) {
+    while (element = element.offsetParent as HTMLElement) {
         offsetTop += element.offsetTop;
         offsetLeft += element.offsetLeft;
     }
