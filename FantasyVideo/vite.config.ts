@@ -22,6 +22,7 @@ const viteConfig = ({ mode }: ConfigEnv): UserConfig => {
         '/@': pathResolve('./src/'),
         assets: pathResolve('./src/assets'),
     }
+    console.log(VITE_PROXY_URL);
 
     let proxy: Record<string, string | ProxyOptions> = {}
     if (VITE_PROXY_URL) {

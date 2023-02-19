@@ -19,8 +19,8 @@ import { Provider } from 'react-redux'
 // css
 import './index.less'
 // import './components/video/FilterBar.less'
-import {Alert as AlertF} from '@fantasy955/fantasy-ui-react'
-import {Alert} from '@zzzzw/happy-ui'
+// import {Alert as AlertF} from '@fantasy955/fantasy-ui-react'
+// import {Alert} from '@zzzzw/happy-ui'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
