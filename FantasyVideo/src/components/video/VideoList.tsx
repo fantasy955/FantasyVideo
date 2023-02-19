@@ -7,8 +7,8 @@ import { CSSProperties } from "react"
 
 interface VedioListProps {
     videos: Video[]
-    topCategory?: string,
-    subCategory?: string,
+    topCategory: string | null,
+    subCategory: string | null,
     title?: string,
     style?: CSSProperties
 }

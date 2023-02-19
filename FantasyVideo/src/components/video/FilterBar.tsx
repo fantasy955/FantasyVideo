@@ -13,8 +13,8 @@ import recommendedLogo from '/@/assets/svg/recommended.svg'
 
 interface FilterBarProps {
     params: {
-        topCategory: string,
-        subCategory: string,
+        topCategory: string | null,
+        subCategory: string | null,
         year: number | null | string,
         region: string | null,
         order: string | null,

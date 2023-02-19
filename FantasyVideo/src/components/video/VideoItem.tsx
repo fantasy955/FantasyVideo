@@ -7,8 +7,8 @@ import styles from './css/VideoItem.module.css'
 
 interface VideoItemProps {
     video: Video,
-    topCategory?: string,
-    subCategory?: string,
+    topCategory: string | null,
+    subCategory: string | null,
 }
 
 
