@@ -63,7 +63,7 @@ export default function Home() {
     return (
         <div>
             <Spin spinning={loadHomeVideos}>
-                <VideoList videos={homeVideos} title={'最新热门影片推荐'} />
+                <VideoList topCategory={null} subCategory={null} videos={homeVideos} title={'最新热门影片推荐'} />
             </Spin>
             {
                 topCategoryList.map((category) => {
@@ -71,8 +71,10 @@ export default function Home() {
                         <Spin key={category} spinning={!hotVideosByCategory[category] || hotVideosByCategory[category].loading}>
                             {
                                 !hotVideosByCategory[category] ? '' :
-                                    <VideoList style={{ marginTop: 16 }}
+                                    <VideoList
+                                        style={{ marginTop: 16 }}
                                         topCategory={category}
+                                        subCategory={null}
                                         videos={hotVideosByCategory[category].videos}
                                         title={'最新' + t(`video.topCategory.${category}`)} />
                             }
