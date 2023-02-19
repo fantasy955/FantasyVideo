@@ -1,5 +1,5 @@
 import { Layout, Spin, Divider } from 'antd'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useLoaderData, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import LocationBar from '/@/components/LocationBar'
 import { getVideos } from '/@/api/frontend/video'
@@ -48,7 +48,7 @@ export default function CategoryIndex() {
     }, [topCategory, subCategory, order, region, year])
 
 
-    const handleSearch = (params:
+    const handleSearch = useCallback((params:
         {
             top: string
             sub: string
@@ -65,7 +65,7 @@ export default function CategoryIndex() {
             to = to.substring(0, to.length - 1)
         }
         navigate(to)
-    }
+    }, []);
 
     return (
         <div>
